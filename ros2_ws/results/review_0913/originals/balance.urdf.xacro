@@ -1,0 +1,328 @@
+```xml
+<?xml version="1.0"?>
+
+<robot
+    xmlns:xacro="http://www.ros.org/wiki/xacro"
+    name="balance">
+
+    <!-- ========================================================= -->
+    <!-- Xacro 参数与配置文件                                      -->
+    <!-- ========================================================= -->
+
+    <!-- All numerical dynamics parameters are centralized in physical.yaml. -->
+
+    <xacro:arg
+        name="wheel_contact"
+        default="sphere"/>
+
+    <xacro:arg
+        name="physical"
+        default="$(find balance_sim)/config/physical.yaml"/>
+
+    <xacro:arg
+        name="controllers"
+        default="$(find balance_sim)/config/controllers.yaml"/>
+
+    <xacro:property
+        name="p"
+        value="${xacro.load_yaml('$(arg physical)')}"/>
+
+
+    <!-- ========================================================= -->
+    <!-- 车体刚体 base_link                                        -->
+    <!-- ========================================================= -->
+
+    <link name="base_link">
+
+        <!-- 惯性参数 -->
+        <inertial>
+            <origin xyz="0 0 ${p['l']}"/>
+
+            <mass value="${p['m_B']}"/>
+
+            <inertia
+                ixx="${p['I_Bxx']}"
+                iyy="${p['I_Byy']}"
+                izz="${p['I_Bzz']}"
+                ixy="0"
+                ixz="0"
+                iyz="0"/>
+        </inertial>
+
+        <!-- 可视模型 -->
+        <visual>
+            <origin xyz="0 0 ${p['l']}"/>
+
+            <geometry>
+                <box size="0.24 0.28 0.36"/>
+            </geometry>
+
+            <material name="blue">
+                <color rgba="0.1 0.3 0.8 1"/>
+            </material>
+        </visual>
+
+        <!-- 碰撞模型 -->
+        <collision>
+            <origin xyz="0 0 ${p['l']}"/>
+
+            <geometry>
+                <box size="0.24 0.28 0.36"/>
+            </geometry>
+        </collision>
+
+    </link>
+
+
+    <!-- ========================================================= -->
+    <!-- IMU                                                     -->
+    <!-- ========================================================= -->
+
+    <!--
+        IMU is attached directly to base_link:
+        no extra mass or fixed-joint reduction ambiguity.
+    -->
+
+    <gazebo reference="base_link">
+
+        <sensor
+            name="imu"
+            type="imu">
+
+            <always_on>true</always_on>
+            <update_rate>1000</update_rate>
+            <topic>/balance/imu</topic>
+
+            <imu>
+                <orientation_reference_frame>
+                    <localization>CUSTOM</localization>
+
+                    <custom_rpy parent_frame="world">
+                        0 0 0
+                    </custom_rpy>
+                </orientation_reference_frame>
+            </imu>
+
+        </sensor>
+
+    </gazebo>
+
+
+    <!-- ========================================================= -->
+    <!-- 车轮宏                                                    -->
+    <!-- ========================================================= -->
+
+    <xacro:macro
+        name="wheel"
+        params="side sign key">
+
+        <link name="${side}_wheel">
+
+            <!-- 车轮惯性 -->
+            <inertial>
+
+                <mass value="${p['m_' + key]}"/>
+
+                <inertia
+                    ixx="${p['I_' + key + 'zz']}"
+                    iyy="${p['I_' + key + 'yy']}"
+                    izz="${p['I_' + key + 'zz']}"
+                    ixy="0"
+                    ixz="0"
+                    iyz="0"/>
+
+            </inertial>
+
+
+            <!-- 车轮可视模型 -->
+            <visual>
+
+                <origin rpy="${pi / 2} 0 0"/>
+
+                <geometry>
+                    <cylinder
+                        radius="${p['r']}"
+                        length="${p['wheel_width']}"/>
+                </geometry>
+
+                <material name="black">
+                    <color rgba="0.1 0.1 0.1 1"/>
+                </material>
+
+            </visual>
+
+
+            <!--
+                Ideal narrow-wheel contact:
+                sphere collision avoids finite-width cylinder scrub;
+                visual and inertia remain wheel-like.
+            -->
+
+            <!-- 球形碰撞模型 -->
+            <xacro:if value="${'$(arg wheel_contact)' == 'sphere'}">
+
+                <collision>
+                    <geometry>
+                        <sphere radius="${p['r']}"/>
+                    </geometry>
+                </collision>
+
+            </xacro:if>
+
+
+            <!-- 圆柱形碰撞模型 -->
+            <xacro:if value="${'$(arg wheel_contact)' == 'cylinder'}">
+
+                <collision>
+
+                    <origin rpy="${pi / 2} 0 0"/>
+
+                    <geometry>
+                        <cylinder
+                            radius="${p['r']}"
+                            length="${p['wheel_width']}"/>
+                    </geometry>
+
+                </collision>
+
+            </xacro:if>
+
+        </link>
+
+
+        <!-- 车轮与车体之间的转动关节 -->
+        <joint
+            name="${side}_wheel_joint"
+            type="continuous">
+
+            <parent link="base_link"/>
+            <child link="${side}_wheel"/>
+
+            <origin xyz="0 ${sign * p['d'] / 2} 0"/>
+
+            <axis xyz="0 1 0"/>
+
+            <limit
+                effort="5"
+                velocity="100"/>
+
+            <dynamics
+                damping="0"
+                friction="0"/>
+
+        </joint>
+
+
+        <!-- Gazebo 接触摩擦参数 -->
+        <gazebo reference="${side}_wheel">
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+        </gazebo>
+
+    </xacro:macro>
+
+
+    <!-- 使用 wheel 宏生成左右两个车轮 -->
+
+    <xacro:wheel
+        side="left"
+        sign="1"
+        key="L"/>
+
+    <xacro:wheel
+        side="right"
+        sign="-1"
+        key="R"/>
+
+
+    <!-- ========================================================= -->
+    <!-- ros2_control                                              -->
+    <!-- ========================================================= -->
+
+    <ros2_control
+        name="GazeboSimSystem"
+        type="system">
+
+        <hardware>
+            <plugin>
+                gz_ros2_control/GazeboSimSystem
+            </plugin>
+        </hardware>
+
+
+        <!-- 为一个车轮定义控制接口 -->
+        <xacro:macro
+            name="interface"
+            params="side">
+
+            <joint name="${side}_wheel_joint">
+
+                <command_interface name="effort">
+                    <param name="min">-5</param>
+                    <param name="max">5</param>
+                </command_interface>
+
+                <state_interface name="position"/>
+                <state_interface name="velocity"/>
+                <state_interface name="effort"/>
+
+            </joint>
+
+        </xacro:macro>
+
+
+        <!-- 给左右轮生成控制接口 -->
+
+        <xacro:interface side="left"/>
+        <xacro:interface side="right"/>
+
+    </ros2_control>
+
+
+    <!-- ========================================================= -->
+    <!-- Gazebo 插件                                               -->
+    <!-- ========================================================= -->
+
+    <gazebo>
+
+        <!-- ros2_control Gazebo 插件 -->
+        <plugin
+            filename="libgz_ros2_control-system.so"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+
+            <parameters>
+                $(arg controllers)
+            </parameters>
+
+        </plugin>
+
+
+        <!-- Gazebo 里程计发布器 -->
+        <plugin
+            filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+
+            <dimensions>3</dimensions>
+
+            <odom_publish_frequency>
+                1000
+            </odom_publish_frequency>
+
+            <odom_topic>
+                /balance/odometry
+            </odom_topic>
+
+            <odom_frame>
+                world
+            </odom_frame>
+
+            <robot_base_frame>
+                base_link
+            </robot_base_frame>
+
+        </plugin>
+
+    </gazebo>
+
+</robot>
+```

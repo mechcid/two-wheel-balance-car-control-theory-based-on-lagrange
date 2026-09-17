@@ -1,0 +1,12 @@
+{
+  "purpose": "核实ROS侧数据通道及消息类型",
+  "command": [
+    "ros2",
+    "topic",
+    "list",
+    "-t",
+    "--no-daemon"
+  ],
+  "returncode": 0,
+  "output": "/balance/imu [sensor_msgs/msg/Imu]\n/balance/odometry [nav_msgs/msg/Odometry]\n/balance/state_and_torque [std_msgs/msg/Float64MultiArray]\n/clock [rosgraph_msgs/msg/Clock]\n/controller_manager/activity [controller_manager_msgs/msg/ControllerManagerActivity]\n/controller_manager/introspection_data/full [pal_statistics_msgs/msg/Statistics]\n/controller_manager/introspection_data/names [pal_statistics_msgs/msg/StatisticsNames]\n/controller_manager/introspection_data/values [pal_statistics_msgs/msg/StatisticsValues]\n/controller_manager/statistics/full [pal_statistics_msgs/msg/Statistics]\n/controller_manager/statistics/names [pal_statistics_msgs/msg/StatisticsNames]\n/controller_manager/statistics/values [pal_statistics_msgs/msg/StatisticsValues]\n/diagnostics [diagnostic_msgs/msg/DiagnosticArray]\n/dynamic_joint_states [control_msgs/msg/DynamicJointState]\n/joint_state_broadcaster/transition_event [lifecycle_msgs/msg/TransitionEvent]\n/joint_states [sensor_msgs/msg/JointState]\n/parameter_events [rcl_interfaces/msg/ParameterEvent]\n/robot_description [std_msgs/msg/String]\n/rosout [rcl_interfaces/msg/Log]\n/tf [tf2_msgs/msg/TFMessage]\n/tf_static [tf2_msgs/msg/TFMessage]\n/wheel_effort/commands [std_msgs/msg/Float64MultiArray]\n/wheel_effort/transition_event [lifecycle_msgs/msg/TransitionEvent]\n/world/balance_world/wrench/clear [ros_gz_interfaces/msg/Entity]\n/world/balance_world/wrench/persistent [ros_gz_interfaces/msg/EntityWrench]\n"
+}

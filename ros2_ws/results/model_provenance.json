@@ -1,0 +1,6 @@
+{
+  "src/balance_sim/description/balance.urdf.xacro": "d9c5281dd025644a666de5d65771362c5fa0a90755877e59c97cb40dac968683",
+  "src/balance_sim/config/physical.yaml": "7f4d84a9b3f76ae4801f6a511126db3cc0c45f008339d05aa1751d0d364ec360",
+  "src/balance_sim/config/lqr.yaml": "3ee21e38042fa01dea80ec4629d8bd6f989e94cade19d138ab4dbb2a8a424acb",
+  "src/balance_sim/worlds/balance.sdf": "c03636e783e6d9c5f101fc19819568e043ce10145b39a4c9ceaa710d870b04bb"
+}

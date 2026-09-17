@@ -1,0 +1,32 @@
+1789108488.5192776 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-14-34-48-518815-akxlg-34429
+1789108488.5193424 [INFO] [launch]: Default logging verbosity is set to INFO
+1789108488.5829597 [INFO] [gz-1]: process started with pid [34444]
+1789108488.5830567 [INFO] [robot_state_publisher-2]: process started with pid [34445]
+1789108488.5830891 [INFO] [parameter_bridge-3]: process started with pid [34446]
+1789108488.5831151 [INFO] [create-4]: process started with pid [34447]
+1789108488.5831370 [INFO] [spawner-5]: process started with pid [34452]
+1789108488.5831580 [INFO] [lqr_node-6]: process started with pid [34453]
+1789108488.5995657 [robot_state_publisher-2] [WARN] [1789108488.599227917] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789108488.5996578 [robot_state_publisher-2] [INFO] [1789108488.599270561] [robot_state_publisher]: Robot initialized
+1789108489.1307995 [INFO] [create-4]: process has finished cleanly [pid 34447]
+1789108489.6424878 [parameter_bridge-3] [INFO] [1789108489.641894430] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789108489.6446607 [parameter_bridge-3] [INFO] [1789108489.644304534] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789108489.6505136 [parameter_bridge-3] [INFO] [1789108489.650117881] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789108489.6526396 [parameter_bridge-3] [INFO] [1789108489.652338966] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789108489.6550052 [parameter_bridge-3] [INFO] [1789108489.654781592] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789108505.4693320 [INFO] [spawner-5]: process has finished cleanly [pid 34452]
+1789108523.9925759 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789108528.9996488 [ERROR] [lqr_node-6]: process[lqr_node-6] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789108529.0003259 [ERROR] [parameter_bridge-3]: process[parameter_bridge-3] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789108529.0007875 [ERROR] [robot_state_publisher-2]: process[robot_state_publisher-2] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789108529.0014627 [ERROR] [gz-1]: process[gz-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789108529.0020068 [INFO] [lqr_node-6]: sending signal 'SIGTERM' to process[lqr_node-6]
+1789108529.0033453 [INFO] [parameter_bridge-3]: sending signal 'SIGTERM' to process[parameter_bridge-3]
+1789108529.0042408 [INFO] [robot_state_publisher-2]: sending signal 'SIGTERM' to process[robot_state_publisher-2]
+1789108529.0050666 [INFO] [gz-1]: sending signal 'SIGTERM' to process[gz-1]
+1789108529.0054305 [parameter_bridge-3] [INFO] [1789108529.003675436] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789108529.0056906 [robot_state_publisher-2] [INFO] [1789108529.004526241] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789108529.1181519 [INFO] [robot_state_publisher-2]: process has finished cleanly [pid 34445]
+1789108529.1194479 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 34446]
+1789108529.1564741 [INFO] [gz-1]: process has finished cleanly [pid 34444]
+1789108529.1632507 [ERROR] [lqr_node-6]: process has died [pid 34453, exit code 1, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/lqr_node --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/lqr.yaml --params-file /tmp/launch_params_n0gr7lj2'].

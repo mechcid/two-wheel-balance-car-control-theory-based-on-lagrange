@@ -1,0 +1,14 @@
+running develop
+running egg_info
+writing balance_sim.egg-info/PKG-INFO
+writing dependency_links to balance_sim.egg-info/dependency_links.txt
+writing entry points to balance_sim.egg-info/entry_points.txt
+writing top-level names to balance_sim.egg-info/top_level.txt
+reading manifest file 'balance_sim.egg-info/SOURCES.txt'
+writing manifest file 'balance_sim.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/python3.12/site-packages/balance-sim.egg-link (link to .)
+Installing lqr_node script to /home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim
+
+Installed /home/mechcid/lagarain/ros2_ws/build/balance_sim
+running symlink_data

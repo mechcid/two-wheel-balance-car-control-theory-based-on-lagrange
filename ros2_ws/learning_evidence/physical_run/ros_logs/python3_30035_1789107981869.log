@@ -1,0 +1,5 @@
+[INFO] [1789107981.926495572] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[INFO] [1789107984.460490342] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[INFO] [1789107987.092497640] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
+[INFO] [1789107989.405510005] [spawner_joint_state_broadcaster]: Loaded wheel_effort
+[INFO] [1789107996.341247141] [spawner_joint_state_broadcaster]: Configured and activated wheel_effort

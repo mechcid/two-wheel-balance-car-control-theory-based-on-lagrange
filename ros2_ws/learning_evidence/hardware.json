@@ -1,0 +1,13 @@
+{
+  "purpose": "确认effort被认领而position/velocity是反馈",
+  "command": [
+    "ros2",
+    "service",
+    "call",
+    "/controller_manager/list_hardware_interfaces",
+    "controller_manager_msgs/srv/ListHardwareInterfaces",
+    "{}"
+  ],
+  "returncode": 0,
+  "output": "waiting for service to become available...\nrequester: making request: controller_manager_msgs.srv.ListHardwareInterfaces_Request()\n\nresponse:\ncontroller_manager_msgs.srv.ListHardwareInterfaces_Response(command_interfaces=[controller_manager_msgs.msg.HardwareInterface(name='left_wheel_joint/effort', data_type='double', is_available=True, is_claimed=True), controller_manager_msgs.msg.HardwareInterface(name='right_wheel_joint/effort', data_type='double', is_available=True, is_claimed=True)], state_interfaces=[controller_manager_msgs.msg.HardwareInterface(name='left_wheel_joint/effort', data_type='double', is_available=True, is_claimed=False), controller_manager_msgs.msg.HardwareInterface(name='left_wheel_joint/position', data_type='double', is_available=True, is_claimed=False), controller_manager_msgs.msg.HardwareInterface(name='left_wheel_joint/velocity', data_type='double', is_available=True, is_claimed=False), controller_manager_msgs.msg.HardwareInterface(name='right_wheel_joint/effort', data_type='double', is_available=True, is_claimed=False), controller_manager_msgs.msg.HardwareInterface(name='right_wheel_joint/position', data_type='double', is_available=True, is_claimed=False), controller_manager_msgs.msg.HardwareInterface(name='right_wheel_joint/velocity', data_type='double', is_available=True, is_claimed=False)])\n\n"
+}

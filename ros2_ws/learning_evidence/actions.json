@@ -1,0 +1,10 @@
+{
+  "purpose": "确认项目是否真的有action接口",
+  "command": [
+    "ros2",
+    "action",
+    "list"
+  ],
+  "returncode": 0,
+  "output": ""
+}

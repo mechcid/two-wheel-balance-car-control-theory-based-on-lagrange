@@ -1,0 +1,32 @@
+1789106857.4099317 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-14-07-37-409217-akxlg-18091
+1789106857.4100296 [INFO] [launch]: Default logging verbosity is set to INFO
+1789106857.4903848 [INFO] [gz-1]: process started with pid [18131]
+1789106857.4906669 [INFO] [robot_state_publisher-2]: process started with pid [18132]
+1789106857.4907701 [INFO] [parameter_bridge-3]: process started with pid [18133]
+1789106857.4908516 [INFO] [create-4]: process started with pid [18134]
+1789106857.4909227 [INFO] [spawner-5]: process started with pid [18139]
+1789106857.4909897 [INFO] [lqr_node-6]: process started with pid [18140]
+1789106857.5189388 [robot_state_publisher-2] [WARN] [1789106857.518292042] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789106857.5191617 [robot_state_publisher-2] [INFO] [1789106857.518374682] [robot_state_publisher]: Robot initialized
+1789106858.0914061 [INFO] [create-4]: process has finished cleanly [pid 18134]
+1789106858.5655141 [parameter_bridge-3] [INFO] [1789106858.565092727] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789106858.5664763 [parameter_bridge-3] [INFO] [1789106858.566192636] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789106858.5681684 [parameter_bridge-3] [INFO] [1789106858.567999436] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789106858.5690157 [parameter_bridge-3] [INFO] [1789106858.568914077] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789106858.5704505 [parameter_bridge-3] [INFO] [1789106858.570267848] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789106873.7634749 [INFO] [spawner-5]: process has finished cleanly [pid 18139]
+1789106880.0377188 [parameter_bridge-3] [INFO] [1789106880.037421915] [ros_gz_bridge]: Passing message from ROS ros_gz_interfaces/msg/EntityWrench to Gazebo gz.msgs.EntityWrench (showing msg only once per type)
+1789106880.2357850 [parameter_bridge-3] [INFO] [1789106880.235344868] [ros_gz_bridge]: Passing message from ROS ros_gz_interfaces/msg/Entity to Gazebo gz.msgs.Entity (showing msg only once per type)
+1789106906.0249419 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789106906.0307631 [INFO] [lqr_node-6]: sending signal 'SIGINT' to process[lqr_node-6]
+1789106906.0325086 [INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+1789106906.0336742 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1789106906.0351610 [INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+1789106906.0356348 [robot_state_publisher-2] [INFO] [1789106906.024687544] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789106906.0359890 [parameter_bridge-3] [INFO] [1789106906.024708278] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789106906.0370772 [parameter_bridge-3] [INFO] [1789106906.032799649] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789106906.0378027 [robot_state_publisher-2] [INFO] [1789106906.033888585] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789106906.1436656 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 18133]
+1789106906.1494625 [INFO] [robot_state_publisher-2]: process has finished cleanly [pid 18132]
+1789106906.1508861 [ERROR] [lqr_node-6]: process has died [pid 18140, exit code -2, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/lqr_node --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/lqr.yaml --params-file /tmp/launch_params_hzme8njf'].
+1789106906.2697654 [INFO] [gz-1]: process has finished cleanly [pid 18131]

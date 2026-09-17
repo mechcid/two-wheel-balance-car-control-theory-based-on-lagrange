@@ -1,0 +1,12 @@
+{
+  "purpose": "核实IMU消息的坐标标签、姿态和角速度",
+  "command": [
+    "ros2",
+    "topic",
+    "echo",
+    "/balance/imu",
+    "--once"
+  ],
+  "returncode": 0,
+  "output": "header:\n  stamp:\n    sec: 0\n    nanosec: 5000000\n  frame_id: balance/base_link/imu\norientation:\n  x: 0.0\n  y: 0.01999866669333308\n  z: 0.0\n  w: 0.9998000066665778\norientation_covariance:\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\nangular_velocity:\n  x: 0.0\n  y: 0.0\n  z: 0.0\nangular_velocity_covariance:\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\nlinear_acceleration:\n  x: 0.0\n  y: 0.0\n  z: 1.7763568394002505e-15\nlinear_acceleration_covariance:\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n- 0.0\n---\n"
+}

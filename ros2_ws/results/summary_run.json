@@ -1,0 +1,162 @@
+{
+  "upright": {
+    "source": "Gazebo ROS CSV, not linear solve_ivp",
+    "duration": 15.99,
+    "tail_max_abs": {
+      "x": 8.094762361402246e-41,
+      "psi": 7.39788260376693e-36,
+      "theta": 9.879402382290939e-41,
+      "xdot": 0.0,
+      "psidot": 1.999601236163352e-34,
+      "thetadot": 7.72560552390348e-39
+    },
+    "limits": {
+      "x": 0.01,
+      "psi": 0.01,
+      "theta": 0.005,
+      "xdot": 0.02,
+      "psidot": 0.02,
+      "thetadot": 0.02
+    },
+    "saturation_fraction": 0.0,
+    "peak_torque": 7.694129335846543e-35,
+    "max_sample_gap": 0.005000000000000782,
+    "max_torque_step": 1.1797842035609727e-34,
+    "converged": true,
+    "peak_pitch": 1.4576483901965161e-40,
+    "peak_yaw": 7.39788260376693e-36,
+    "tail_torque_rms": 2.6075810365578255e-35,
+    "initial_state": [
+      0.0,
+      0.0,
+      -0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "actual_mean_rate_hz": 200.00000000000003
+  },
+  "pitch": {
+    "source": "Gazebo ROS CSV, not linear solve_ivp",
+    "duration": 15.99,
+    "tail_max_abs": {
+      "x": 2.956630258306794e-06,
+      "psi": 7.619132405116994e-19,
+      "theta": 6.935156036444021e-07,
+      "xdot": 0.00010011279050144759,
+      "psidot": 3.119174998581061e-18,
+      "thetadot": 3.766316647019834e-05
+    },
+    "limits": {
+      "x": 0.01,
+      "psi": 0.01,
+      "theta": 0.005,
+      "xdot": 0.02,
+      "psidot": 0.02,
+      "thetadot": 0.02
+    },
+    "saturation_fraction": 0.0,
+    "peak_torque": 0.332980118616024,
+    "max_sample_gap": 0.005000000000000782,
+    "max_torque_step": 0.08217377458550368,
+    "converged": true,
+    "peak_pitch": 0.04,
+    "peak_yaw": 2.659213556013218e-16,
+    "tail_torque_rms": 1.9183575510323573e-05,
+    "initial_state": [
+      2.117582368135751e-22,
+      0.0,
+      0.04,
+      -2.220446049250313e-16,
+      0.0,
+      0.0
+    ],
+    "actual_mean_rate_hz": 200.00000000000003
+  },
+  "push": {
+    "source": "Gazebo ROS CSV, not linear solve_ivp",
+    "duration": 15.99,
+    "tail_max_abs": {
+      "x": 2.1464300277178855e-06,
+      "psi": 1.1219969997507973e-20,
+      "theta": 9.330699321539595e-07,
+      "xdot": 0.0001001767466092096,
+      "psidot": 8.909578232092559e-20,
+      "thetadot": 3.536940808061024e-05
+    },
+    "limits": {
+      "x": 0.01,
+      "psi": 0.01,
+      "theta": 0.005,
+      "xdot": 0.02,
+      "psidot": 0.02,
+      "thetadot": 0.02
+    },
+    "saturation_fraction": 0.0,
+    "peak_torque": 0.03356437117226266,
+    "max_sample_gap": 0.005000000000000782,
+    "max_torque_step": 0.008358407088956897,
+    "converged": true,
+    "peak_pitch": 0.0020766366020803714,
+    "peak_yaw": 2.4365818778538482e-17,
+    "tail_torque_rms": 1.5176825485888216e-05,
+    "initial_state": [
+      0.0,
+      0.0,
+      -0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "actual_mean_rate_hz": 200.00000000000003
+  },
+  "yaw": {
+    "source": "Gazebo ROS CSV, not linear solve_ivp",
+    "duration": 15.99,
+    "tail_max_abs": {
+      "x": 2.3239443350552832e-18,
+      "psi": 9.256520216602646e-12,
+      "theta": 8.967193312931328e-19,
+      "xdot": 0.0,
+      "psidot": 1.4793845957318587e-11,
+      "thetadot": 6.6239851932080794e-18
+    },
+    "limits": {
+      "x": 0.01,
+      "psi": 0.01,
+      "theta": 0.005,
+      "xdot": 0.02,
+      "psidot": 0.02,
+      "thetadot": 0.02
+    },
+    "saturation_fraction": 0.0,
+    "peak_torque": 0.02000000000000006,
+    "max_sample_gap": 0.005000000000000782,
+    "max_torque_step": 0.0013328340248548384,
+    "converged": true,
+    "peak_pitch": 2.821487687604908e-18,
+    "peak_yaw": 0.04,
+    "tail_torque_rms": 2.81247756786387e-13,
+    "initial_state": [
+      0.0,
+      0.04,
+      -0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "actual_mean_rate_hz": 200.00000000000003
+  },
+  "independent_torque_probes": {
+    "left": {
+      "xdot": 0.5953587550818276,
+      "psidot": -1.6704186107396526,
+      "thetadot": -1.7829016602251921
+    },
+    "right": {
+      "xdot": 0.5636400085499669,
+      "psidot": 1.5491029014009947,
+      "thetadot": -1.6533674002996097
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "purpose": "查看命令的真实数据契约",
+  "command": [
+    "ros2",
+    "interface",
+    "show",
+    "std_msgs/msg/Float64MultiArray"
+  ],
+  "returncode": 0,
+  "output": "# This was originally provided as an example message.\n# It is deprecated as of Foxy\n# It is recommended to create your own semantically meaningful message.\n# However if you would like to continue using this please use the equivalent in example_msgs.\n\n# Please look at the MultiArrayLayout message definition for\n# documentation on all multiarrays.\n\nMultiArrayLayout  layout        # specification of data layout\n\t#\n\t#\n\t#\n\t#\n\t#\n\tMultiArrayDimension[] dim #\n\t\tstring label   #\n\t\tuint32 size    #\n\t\tuint32 stride  #\n\tuint32 data_offset        #\nfloat64[]         data          # array of data\n"
+}

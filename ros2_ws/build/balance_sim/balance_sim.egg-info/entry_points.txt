@@ -1,0 +1,4 @@
+[console_scripts]
+interaction_panel = balance_sim.panel:main
+lqr_node = balance_sim.controller:main
+startup = balance_sim.startup:main

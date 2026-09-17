@@ -1,0 +1,1 @@
+PASS: inertias, joint axes, two state transforms, exact gain and parameter reuse. No physical rollout tested here.

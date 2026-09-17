@@ -1,0 +1,5 @@
+[INFO] [1789289251.926649895] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[INFO] [1789289254.446433433] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[WARN] [1789289264.457095768] [spawner_joint_state_broadcaster]: Failed getting a result from calling /controller_manager/switch_controller in 10.0. (Attempt 1 of 3.)
+[WARN] [1789289274.457943577] [spawner_joint_state_broadcaster]: Failed getting a result from calling /controller_manager/switch_controller in 10.0. (Attempt 2 of 3.)
+[WARN] [1789289284.459065355] [spawner_joint_state_broadcaster]: Failed getting a result from calling /controller_manager/switch_controller in 10.0. (Attempt 3 of 3.)

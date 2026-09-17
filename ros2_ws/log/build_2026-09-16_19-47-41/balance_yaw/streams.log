@@ -1,0 +1,28 @@
+[0.765s] Invoking command in '/home/mechcid/lagarain/ros2_ws/build/balance_yaw': AMENT_PREFIX_PATH=/home/mechcid/lagarain/ros2_ws/install/balance_sim:${AMENT_PREFIX_PATH} PYTHONPATH=/home/mechcid/lagarain/ros2_ws/build/balance_yaw/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/python3.12/site-packages:/home/mechcid/lagarain/ros2_ws/build/balance_sim:/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/mechcid/lagarain/ros2_ws/build/balance_yaw/build --no-deps symlink_data
+[0.947s] running develop
+[1.047s] running egg_info
+[1.047s] creating balance_yaw.egg-info
+[1.057s] writing balance_yaw.egg-info/PKG-INFO
+[1.057s] writing dependency_links to balance_yaw.egg-info/dependency_links.txt
+[1.057s] writing entry points to balance_yaw.egg-info/entry_points.txt
+[1.057s] writing top-level names to balance_yaw.egg-info/top_level.txt
+[1.057s] writing manifest file 'balance_yaw.egg-info/SOURCES.txt'
+[1.077s] reading manifest file 'balance_yaw.egg-info/SOURCES.txt'
+[1.077s] writing manifest file 'balance_yaw.egg-info/SOURCES.txt'
+[1.088s] running build_ext
+[1.088s] Creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/python3.12/site-packages/balance-yaw.egg-link (link to .)
+[1.088s] Installing yaw_node script to /home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/balance_yaw
+[1.089s] 
+[1.089s] Installed /home/mechcid/lagarain/ros2_ws/build/balance_yaw
+[1.089s] running symlink_data
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index/packages
+[1.089s] symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/resource/balance_yaw -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index/packages
+[1.089s] symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/package.xml -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/config
+[1.089s] symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/config/yaw.yaml -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/config
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/launch
+[1.089s] symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/launch/yaw.launch.py -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/launch
+[1.089s] creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/tools
+[1.114s] Invoked command in '/home/mechcid/lagarain/ros2_ws/build/balance_yaw' returned '0': AMENT_PREFIX_PATH=/home/mechcid/lagarain/ros2_ws/install/balance_sim:${AMENT_PREFIX_PATH} PYTHONPATH=/home/mechcid/lagarain/ros2_ws/build/balance_yaw/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/python3.12/site-packages:/home/mechcid/lagarain/ros2_ws/build/balance_sim:/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/mechcid/lagarain/ros2_ws/build/balance_yaw/build --no-deps symlink_data

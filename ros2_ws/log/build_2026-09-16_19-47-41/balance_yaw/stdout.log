@@ -1,0 +1,26 @@
+running develop
+running egg_info
+creating balance_yaw.egg-info
+writing balance_yaw.egg-info/PKG-INFO
+writing dependency_links to balance_yaw.egg-info/dependency_links.txt
+writing entry points to balance_yaw.egg-info/entry_points.txt
+writing top-level names to balance_yaw.egg-info/top_level.txt
+writing manifest file 'balance_yaw.egg-info/SOURCES.txt'
+reading manifest file 'balance_yaw.egg-info/SOURCES.txt'
+writing manifest file 'balance_yaw.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/python3.12/site-packages/balance-yaw.egg-link (link to .)
+Installing yaw_node script to /home/mechcid/lagarain/ros2_ws/install/balance_yaw/lib/balance_yaw
+
+Installed /home/mechcid/lagarain/ros2_ws/build/balance_yaw
+running symlink_data
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index/packages
+symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/resource/balance_yaw -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/ament_index/resource_index/packages
+symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/package.xml -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/config
+symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/config/yaw.yaml -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/config
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/launch
+symbolically linking /home/mechcid/lagarain/ros2_ws/build/balance_yaw/launch/yaw.launch.py -> /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/launch
+creating /home/mechcid/lagarain/ros2_ws/install/balance_yaw/share/balance_yaw/tools

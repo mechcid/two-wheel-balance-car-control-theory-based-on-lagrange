@@ -1,0 +1,12 @@
+{
+  "purpose": "核实实际参数值而非YAML推断",
+  "command": [
+    "ros2",
+    "param",
+    "get",
+    "/balance_lqr",
+    "control_frequency"
+  ],
+  "returncode": 0,
+  "output": "Double value is: 200.0\n"
+}

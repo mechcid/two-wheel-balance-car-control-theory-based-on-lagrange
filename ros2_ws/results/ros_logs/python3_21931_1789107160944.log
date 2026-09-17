@@ -1,0 +1,3 @@
+[INFO] [1789107161.025446753] [balance_lqr]: K source: existing numerical export; 200.0 Hz, limit 1.0 Nm. DEMO parameters.
+[INFO] [1789107181.830994237] [balance_lqr]: Requested world +x force 1 N for 0.1 s on chassis.
+[INFO] [1789107205.831122690] [balance_lqr]: Requested recording duration reached.

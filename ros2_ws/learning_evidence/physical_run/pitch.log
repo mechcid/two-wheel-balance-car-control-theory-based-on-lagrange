@@ -1,0 +1,159 @@
+[INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/learning_evidence/physical_run/ros_logs/2026-09-11-14-26-21-545966-akxlg-29985
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gz-1]: process started with pid [30012]
+[INFO] [robot_state_publisher-2]: process started with pid [30013]
+[INFO] [parameter_bridge-3]: process started with pid [30014]
+[INFO] [create-4]: process started with pid [30015]
+[INFO] [spawner-5]: process started with pid [30035]
+[INFO] [lqr_node-6]: process started with pid [30036]
+[robot_state_publisher-2] [WARN] [1789107981.632689166] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-2] [INFO] [1789107981.632756452] [robot_state_publisher]: Robot initialized
+[create-4] [INFO] [1789107981.646570221] [ros_gz_sim]: Waiting messages on topic [robot_description].
+[gz-1] [1;32m[Msg] [0m[1;32mGazebo Sim Server v[0m[1;32m8.11.0[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mLoading SDF world file[[0m[1;32m/home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/worlds/balance.sdf[0m[1;32m].[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing entity system service on [[0m[1;32m/[0m[1;32mentity/system/add[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mCreate[0m[1;32m service on [[0m[1;32m/world/balance_world/create_multiple[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mCreate[0m[1;32m service on [[0m[1;32m/world/balance_world/create_multiple/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mRemove[0m[1;32m service on [[0m[1;32m/world/balance_world/remove[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mRemove[0m[1;32m service on [[0m[1;32m/world/balance_world/remove/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPose[0m[1;32m service on [[0m[1;32m/world/balance_world/set_pose[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPose[0m[1;32m service on [[0m[1;32m/world/balance_world/set_pose/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPose[0m[1;32m service on [[0m[1;32m/world/balance_world/set_pose_vector[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPose[0m[1;32m service on [[0m[1;32m/world/balance_world/set_pose_vector/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mLight configuration[0m[1;32m service on [[0m[1;32m/world/balance_world/light_config[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mLight configuration[0m[1;32m service on [[0m[1;32m/world/balance_world/light_config/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPhysics[0m[1;32m service on [[0m[1;32m/world/balance_world/set_physics[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPhysics[0m[1;32m service on [[0m[1;32m/world/balance_world/set_physics/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mSphericalCoordinates[0m[1;32m service on [[0m[1;32m/world/balance_world/set_spherical_coordinates[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mSphericalCoordinates[0m[1;32m service on [[0m[1;32m/world/balance_world/set_spherical_coordinates/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mEnable collision[0m[1;32m service on [[0m[1;32m/world/balance_world/enable_collision[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mEnable collision[0m[1;32m service on [[0m[1;32m/world/balance_world/enable_collision/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mDisable collision[0m[1;32m service on [[0m[1;32m/world/balance_world/disable_collision[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mDisable collision[0m[1;32m service on [[0m[1;32m/world/balance_world/disable_collision/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mMaterial[0m[1;32m service on [[0m[1;32m/world/balance_world/visual_config[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mMaterial[0m[1;32m service on [[0m[1;32m/world/balance_world/visual_config/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mMaterial[0m[1;32m service on [[0m[1;32m/world/balance_world/wheel_slip[0m[1;32m] (async)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mMaterial[0m[1;32m service on [[0m[1;32m/world/balance_world/wheel_slip/blocking[0m[1;32m] (blocking)[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mListening to instantaneous wrench commands in [[0m[1;32m/world/balance_world/wrench[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mListening to persistent wrench commands in [[0m[1;32m/world/balance_world/wrench/persistent[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mListening to wrench clear commands in [[0m[1;32m/world/balance_world/wrench/clear[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mLoaded level [[0m[1;32mdefault[0m[1;32m][0m[1;32m[0m
+[spawner-5] [INFO] [1789107981.926495572] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[lqr_node-6] [INFO] [1789107981.992994760] [balance_lqr]: K source: existing numerical export; 200.0 Hz, limit 1.0 Nm. DEMO parameters.
+[create-4] [INFO] [1789107982.062895730] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-4]: process has finished cleanly [pid 30015]
+[parameter_bridge-3] [INFO] [1789107982.673603615] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1789107982.675215210] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1789107982.680712226] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1789107982.681812967] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1789107982.683147382] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+[gz-1] [INFO] [1789107983.836776909] [gz_ros_control]: Loading controller_manager
+[gz-1] [INFO] [1789107983.842895551] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[gz-1] [WARN] [1789107983.842918105] [controller_manager]: The resource manager is not yet initialized, will wait for the robot description to initialize it..
+[gz-1] [INFO] [1789107983.846817926] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[gz-1] [WARN] [1789107983.846851994] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[gz-1] [INFO] [1789107984.368752727] [controller_manager]: Received robot description from topic.
+[gz-1] [INFO] [1789107984.368922200] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
+[gz-1] [INFO] [1789107984.377637003] [gz_ros_control]: The position_proportional_gain has been set to: 0.1
+[gz-1] [INFO] [1789107984.377749407] [gz_ros_control]: Loading joint: left_wheel_joint
+[gz-1] [INFO] [1789107984.377761868] [gz_ros_control]: 	State:
+[gz-1] [INFO] [1789107984.377772861] [gz_ros_control]: 		 position
+[gz-1] [INFO] [1789107984.377784030] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1789107984.377799580] [gz_ros_control]: 		 effort
+[gz-1] [INFO] [1789107984.377806189] [gz_ros_control]: 	Command:
+[gz-1] [INFO] [1789107984.377812260] [gz_ros_control]: 		 effort
+[gz-1] [INFO] [1789107984.377834049] [gz_ros_control]: Loading joint: right_wheel_joint
+[gz-1] [INFO] [1789107984.377840646] [gz_ros_control]: 	State:
+[gz-1] [INFO] [1789107984.377846921] [gz_ros_control]: 		 position
+[gz-1] [INFO] [1789107984.377852408] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1789107984.377859404] [gz_ros_control]: 		 effort
+[gz-1] [INFO] [1789107984.377865082] [gz_ros_control]: 	Command:
+[gz-1] [INFO] [1789107984.377870649] [gz_ros_control]: 		 effort
+[gz-1] [INFO] [1789107984.377935105] [gz_ros_control]: Loading sensor: imu
+[gz-1] [INFO] [1789107984.377954008] [gz_ros_control]: 	State:
+[gz-1] [WARN] [1789107984.377962540] [gz_ros_control]: IMU sensor 'imu' not found in hardware_info, skipping.
+[gz-1] [INFO] [1789107984.378052437] [controller_manager]: Initialize hardware 'GazeboSimSystem' 
+[gz-1] [WARN] [1789107984.378070036] [controller_manager.hardware_component.system.GazeboSimSystem]: Executor is not available during hardware component initialization for 'GazeboSimSystem'. Skipping node creation!
+[gz-1] [INFO] [1789107984.378132518] [controller_manager]: Successful initialization of hardware 'GazeboSimSystem'
+[gz-1] [INFO] [1789107984.378246644] [controller_manager]: Activating component 'GazeboSimSystem'.
+[gz-1] [INFO] [1789107984.378260476] [resource_manager]: 'configure' hardware 'GazeboSimSystem' 
+[gz-1] [INFO] [1789107984.378266245] [gz_ros_control]: System Successfully configured!
+[gz-1] [INFO] [1789107984.378272281] [resource_manager]: Successful 'configure' of hardware 'GazeboSimSystem'
+[gz-1] [INFO] [1789107984.378280103] [resource_manager]: 'activate' hardware 'GazeboSimSystem' 
+[gz-1] [INFO] [1789107984.378295758] [resource_manager]: Successful 'activate' of hardware 'GazeboSimSystem'
+[gz-1] [WARN] [1789107984.378377847] [controller_manager]: Component 'GazeboSimSystem' does not have read or write statistics initialized, skipping registration.
+[gz-1] [INFO] [1789107984.378386335] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[gz-1] [INFO] [1789107984.432742779] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[gz-1] [INFO] [1789107984.432851025] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[gz-1] [INFO] [1789107984.448379298] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-5] [INFO] [1789107984.460490342] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[gz-1] [INFO] [1789107984.461357920] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[gz-1] [INFO] [1789107984.461521367] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[gz-1] [INFO] [1789107984.472874645] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
+data: true
+
+[gz-1] [INFO] [1789107985.865584182] [controller_manager]: Successfully switched controllers!
+data: true
+
+[spawner-5] [INFO] [1789107987.092497640] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
+[gz-1] [INFO] [1789107987.093350718] [controller_manager]: Loading controller : 'wheel_effort' of type 'effort_controllers/JointGroupEffortController'
+[gz-1] [INFO] [1789107987.093392213] [controller_manager]: Loading controller 'wheel_effort'
+[gz-1] [INFO] [1789107987.096882564] [controller_manager]: Controller 'wheel_effort' node arguments: --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[gz-1] [1;32m[Msg] [0m[1;32mServing world controls on [[0m[1;32m/world/balance_world[0m[1;32m/control], [[0m[1;32m/world/balance_world[0m[1;32m/control/state] and [[0m[1;32m/world/balance_world[0m[1;32m/playback/control][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing GUI information on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mgui/info[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mWorld [[0m[1;32mbalance_world[0m[1;32m] initialized with [[0m[1;32mphysics[0m[1;32m] physics profile.[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing world SDF generation service on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mgenerate_world_sdf[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing world names on [[0m[1;32m/gazebo/worlds[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mResource path add service on [[0m[1;32m/gazebo/resource_paths/add[0m[1;32m].[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mResource path get service on [[0m[1;32m/gazebo/resource_paths/get[0m[1;32m].[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mResource path resolve service on [[0m[1;32m/gazebo/resource_paths/resolve[0m[1;32m].[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mResource paths published on [[0m[1;32m/gazebo/resource_paths[0m[1;32m].[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServer control service on [[0m[1;32m/server_control[0m[1;32m].[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mFound no publishers on /stats, adding root stats topic[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mFound no publishers on /clock, adding root clock topic[0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mOdometryPublisher publishing odometry on [[0m[1;32m/balance/odometry[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mOdometryPublisher publishing odometry with covariance on [[0m[1;32m/model/balance/odometry_with_covariance[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mOdometryPublisher publishing Pose_V (TF) on [[0m[1;32m/model/balance/pose[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing scene information on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mscene/info[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing graph information on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mscene/graph[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing full state on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mstate[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mServing full state (async) on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mstate_async[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPublishing scene information on [[0m[1;32m/world/balance_world/scene/info[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPublishing entity deletions on [[0m[1;32m/world/balance_world/scene/deletion[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPublishing state changes on [[0m[1;32m/world/balance_world/state[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPublishing pose messages on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mpose/info[0m[1;32m][0m[1;32m[0m
+[gz-1] [1;32m[Msg] [0m[1;32mPublishing dynamic pose messages on [[0m[1;32m/world/balance_world[0m[1;32m/[0m[1;32mdynamic_pose/info[0m[1;32m][0m[1;32m[0m
+data: true
+
+[spawner-5] [INFO] [1789107989.405510005] [spawner_joint_state_broadcaster]: Loaded wheel_effort
+[gz-1] [INFO] [1789107989.405998433] [controller_manager]: Configuring controller: 'wheel_effort'
+[gz-1] [INFO] [1789107989.409035088] [wheel_effort]: configure successful
+data: true
+
+[gz-1] [INFO] [1789107991.711695721] [controller_manager]: Activating controllers: [ wheel_effort ]
+data: true
+
+[gz-1] [INFO] [1789107994.033345593] [wheel_effort]: activate successful
+[gz-1] [INFO] [1789107994.033467190] [controller_manager]: Successfully switched controllers!
+data: true
+
+[spawner-5] [INFO] [1789107996.341247141] [spawner_joint_state_broadcaster]: Configured and activated wheel_effort
+[INFO] [spawner-5]: process has finished cleanly [pid 30035]
+data: true
+
+[lqr_node-6] [INFO] [1789108026.680808516] [balance_lqr]: Requested recording duration reached.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [lqr_node-6]: sending signal 'SIGINT' to process[lqr_node-6]
+[INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+[INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+[INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+[parameter_bridge-3] [INFO] [1789108028.673733943] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-2] [INFO] [1789108028.674232392] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[gz-1] [INFO] [1789108028.705665902] [controller_manager.pal_statistics]: Async messages lost 0
+[gz-1] [INFO] [1789108028.705719955] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[gz-1] [INFO] [1789108028.707385829] [controller_manager.pal_statistics]: Async messages lost 0
+[gz-1] [INFO] [1789108028.707418324] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[INFO] [parameter_bridge-3]: process has finished cleanly [pid 30014]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 30013]
+[INFO] [lqr_node-6]: process has finished cleanly [pid 30036]
+[INFO] [gz-1]: process has finished cleanly [pid 30012]

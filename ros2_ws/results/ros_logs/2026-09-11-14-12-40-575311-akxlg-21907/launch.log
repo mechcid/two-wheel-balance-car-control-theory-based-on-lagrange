@@ -1,0 +1,32 @@
+1789107160.5777018 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-14-12-40-575311-akxlg-21907
+1789107160.5778089 [INFO] [launch]: Default logging verbosity is set to INFO
+1789107160.6603966 [INFO] [gz-1]: process started with pid [21922]
+1789107160.6605756 [INFO] [robot_state_publisher-2]: process started with pid [21923]
+1789107160.6606572 [INFO] [parameter_bridge-3]: process started with pid [21924]
+1789107160.6607263 [INFO] [create-4]: process started with pid [21925]
+1789107160.6607883 [INFO] [spawner-5]: process started with pid [21930]
+1789107160.6608453 [INFO] [lqr_node-6]: process started with pid [21931]
+1789107160.6860104 [robot_state_publisher-2] [WARN] [1789107160.685556136] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789107160.6864092 [robot_state_publisher-2] [INFO] [1789107160.685681971] [robot_state_publisher]: Robot initialized
+1789107161.2069395 [INFO] [create-4]: process has finished cleanly [pid 21925]
+1789107161.7070713 [parameter_bridge-3] [INFO] [1789107161.706464266] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789107161.7085960 [parameter_bridge-3] [INFO] [1789107161.708279531] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789107161.7112679 [parameter_bridge-3] [INFO] [1789107161.711145117] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789107161.7128823 [parameter_bridge-3] [INFO] [1789107161.712685361] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789107161.7157516 [parameter_bridge-3] [INFO] [1789107161.715572228] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789107175.5815272 [INFO] [spawner-5]: process has finished cleanly [pid 21930]
+1789107181.8312147 [parameter_bridge-3] [INFO] [1789107181.830885214] [ros_gz_bridge]: Passing message from ROS ros_gz_interfaces/msg/EntityWrench to Gazebo gz.msgs.EntityWrench (showing msg only once per type)
+1789107182.0311234 [parameter_bridge-3] [INFO] [1789107182.030810444] [ros_gz_bridge]: Passing message from ROS ros_gz_interfaces/msg/Entity to Gazebo gz.msgs.Entity (showing msg only once per type)
+1789107207.8203404 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789107207.8220444 [INFO] [lqr_node-6]: sending signal 'SIGINT' to process[lqr_node-6]
+1789107207.8225880 [INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+1789107207.8229094 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1789107207.8232243 [INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+1789107207.8233454 [parameter_bridge-3] [INFO] [1789107207.820221713] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107207.8234317 [robot_state_publisher-2] [INFO] [1789107207.820221465] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107207.8237631 [parameter_bridge-3] [INFO] [1789107207.822650324] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107207.8241603 [robot_state_publisher-2] [INFO] [1789107207.822966263] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107207.8750806 [ERROR] [lqr_node-6]: process has died [pid 21931, exit code -2, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/lqr_node --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/lqr.yaml --params-file /tmp/launch_params_7qr9jt1z'].
+1789107207.9344807 [INFO] [robot_state_publisher-2]: process has finished cleanly [pid 21923]
+1789107207.9366870 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 21924]
+1789107208.0023603 [INFO] [gz-1]: process has finished cleanly [pid 21922]

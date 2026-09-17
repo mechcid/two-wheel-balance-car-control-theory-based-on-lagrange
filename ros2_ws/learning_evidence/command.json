@@ -1,0 +1,12 @@
+{
+  "purpose": "核实力矩发布者、订阅者和QoS",
+  "command": [
+    "ros2",
+    "topic",
+    "info",
+    "/wheel_effort/commands",
+    "--verbose"
+  ],
+  "returncode": 0,
+  "output": "Type: std_msgs/msg/Float64MultiArray\n\nPublisher count: 1\n\nNode name: balance_lqr\nNode namespace: /\nTopic type: std_msgs/msg/Float64MultiArray\nTopic type hash: RIHS01_1025ddc6b9552d191f89ef1a8d2f60f3d373e28b283d8891ddcc974e8c55397f\nEndpoint type: PUBLISHER\nGID: 01.0f.1b.1c.54.75.ff.54.00.00.00.00.00.00.17.03\nQoS profile:\n  Reliability: RELIABLE\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\nSubscription count: 1\n\nNode name: wheel_effort\nNode namespace: /\nTopic type: std_msgs/msg/Float64MultiArray\nTopic type hash: RIHS01_1025ddc6b9552d191f89ef1a8d2f60f3d373e28b283d8891ddcc974e8c55397f\nEndpoint type: SUBSCRIPTION\nGID: 01.0f.1b.1c.3c.75.6e.ae.00.00.00.00.00.00.79.04\nQoS profile:\n  Reliability: BEST_EFFORT\n  History (Depth): UNKNOWN\n  Durability: VOLATILE\n  Lifespan: Infinite\n  Deadline: Infinite\n  Liveliness: AUTOMATIC\n  Liveliness lease duration: Infinite\n\n"
+}

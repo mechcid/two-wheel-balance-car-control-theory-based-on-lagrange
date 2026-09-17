@@ -1,0 +1,28 @@
+1789107981.5466027 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/learning_evidence/physical_run/ros_logs/2026-09-11-14-26-21-545966-akxlg-29985
+1789107981.5466886 [INFO] [launch]: Default logging verbosity is set to INFO
+1789107981.6321144 [INFO] [gz-1]: process started with pid [30012]
+1789107981.6322572 [INFO] [robot_state_publisher-2]: process started with pid [30013]
+1789107981.6323040 [INFO] [parameter_bridge-3]: process started with pid [30014]
+1789107981.6323504 [INFO] [create-4]: process started with pid [30015]
+1789107981.6323795 [INFO] [spawner-5]: process started with pid [30035]
+1789107981.6324117 [INFO] [lqr_node-6]: process started with pid [30036]
+1789107981.6328034 [robot_state_publisher-2] [WARN] [1789107981.632689166] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789107981.6329277 [robot_state_publisher-2] [INFO] [1789107981.632756452] [robot_state_publisher]: Robot initialized
+1789107982.1767755 [INFO] [create-4]: process has finished cleanly [pid 30015]
+1789107982.6741436 [parameter_bridge-3] [INFO] [1789107982.673603615] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789107982.6755190 [parameter_bridge-3] [INFO] [1789107982.675215210] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789107982.6810064 [parameter_bridge-3] [INFO] [1789107982.680712226] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789107982.6820567 [parameter_bridge-3] [INFO] [1789107982.681812967] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789107982.6833074 [parameter_bridge-3] [INFO] [1789107982.683147382] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789107996.5418847 [INFO] [spawner-5]: process has finished cleanly [pid 30035]
+1789108028.6702046 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789108028.6726563 [INFO] [lqr_node-6]: sending signal 'SIGINT' to process[lqr_node-6]
+1789108028.6735697 [INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+1789108028.6741235 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1789108028.6746161 [INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+1789108028.6748066 [parameter_bridge-3] [INFO] [1789108028.673733943] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789108028.6749744 [robot_state_publisher-2] [INFO] [1789108028.674232392] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789108028.7908237 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 30014]
+1789108028.7938998 [INFO] [robot_state_publisher-2]: process has finished cleanly [pid 30013]
+1789108028.8337147 [INFO] [lqr_node-6]: process has finished cleanly [pid 30036]
+1789108028.8517683 [INFO] [gz-1]: process has finished cleanly [pid 30012]

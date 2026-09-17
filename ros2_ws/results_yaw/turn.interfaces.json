@@ -1,0 +1,12 @@
+[
+  {
+    "name": "left_wheel_joint/effort",
+    "claimed": true,
+    "available": true
+  },
+  {
+    "name": "right_wheel_joint/effort",
+    "claimed": true,
+    "available": true
+  }
+]

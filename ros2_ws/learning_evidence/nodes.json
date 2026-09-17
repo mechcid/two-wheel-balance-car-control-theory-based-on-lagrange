@@ -1,0 +1,11 @@
+{
+  "purpose": "核实实际ROS节点，而不是把launch动作数当作节点数",
+  "command": [
+    "ros2",
+    "node",
+    "list",
+    "--no-daemon"
+  ],
+  "returncode": 0,
+  "output": "/balance_lqr\n/controller_manager\n/gz_ros_control\n/joint_state_broadcaster\n/robot_state_publisher\n/ros_gz_bridge\n/spawner_joint_state_broadcaster\n/test_supervisor\n/wheel_effort\n"
+}

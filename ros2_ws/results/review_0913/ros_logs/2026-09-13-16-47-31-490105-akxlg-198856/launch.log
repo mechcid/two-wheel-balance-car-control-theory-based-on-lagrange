@@ -1,0 +1,42 @@
+1789289251.4906797 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/review_0913/ros_logs/2026-09-13-16-47-31-490105-akxlg-198856
+1789289251.4907780 [INFO] [launch]: Default logging verbosity is set to INFO
+1789289251.5805540 [INFO] [gz-1]: process started with pid [198859]
+1789289251.5807014 [INFO] [gz-2]: process started with pid [198860]
+1789289251.5807583 [INFO] [robot_state_publisher-3]: process started with pid [198861]
+1789289251.5807953 [INFO] [parameter_bridge-4]: process started with pid [198862]
+1789289251.5808294 [INFO] [create-5]: process started with pid [198863]
+1789289251.5808582 [INFO] [spawner-6]: process started with pid [198864]
+1789289251.5808828 [INFO] [lqr_node-7]: process started with pid [198867]
+1789289251.5809050 [INFO] [startup-8]: process started with pid [198868]
+1789289251.5809290 [INFO] [interaction_panel-9]: process started with pid [198869]
+1789289251.6283684 [robot_state_publisher-3] [WARN] [1789289251.627882111] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789289251.6285720 [robot_state_publisher-3] [INFO] [1789289251.627973706] [robot_state_publisher]: Robot initialized
+1789289252.1484120 [INFO] [create-5]: process has finished cleanly [pid 198863]
+1789289252.1909914 [ERROR] [interaction_panel-9]: process has died [pid 198869, exit code 1, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/interaction_panel --ros-args'].
+1789289252.6467681 [parameter_bridge-4] [INFO] [1789289252.646482175] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789289252.6475153 [parameter_bridge-4] [INFO] [1789289252.647294924] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789289252.6508195 [parameter_bridge-4] [INFO] [1789289252.650649310] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789289252.6525972 [parameter_bridge-4] [INFO] [1789289252.652369636] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789289252.6552341 [parameter_bridge-4] [INFO] [1789289252.655081672] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789289253.2132173 [ERROR] [gz-2]: process has died [pid 198860, exit code -6, cmd 'gz sim -g'].
+1789289287.2086856 [ERROR] [spawner-6]: process has died [pid 198864, exit code 1, cmd '/opt/ros/jazzy/lib/controller_manager/spawner joint_state_broadcaster wheel_effort --controller-manager-timeout 120 --ros-args'].
+1789289372.0758216 [ERROR] [startup-8]: process has died [pid 198868, exit code 1, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/startup --ros-args'].
+1789289433.1471577 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789289433.1486893 [INFO] [lqr_node-7]: sending signal 'SIGINT' to process[lqr_node-7]
+1789289433.1491144 [INFO] [parameter_bridge-4]: sending signal 'SIGINT' to process[parameter_bridge-4]
+1789289433.1495123 [INFO] [robot_state_publisher-3]: sending signal 'SIGINT' to process[robot_state_publisher-3]
+1789289433.1499205 [INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+1789289433.1500289 [parameter_bridge-4] [INFO] [1789289433.149213983] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789289433.1501052 [robot_state_publisher-3] [INFO] [1789289433.149575816] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789289433.2622664 [INFO] [robot_state_publisher-3]: process has finished cleanly [pid 198861]
+1789289433.2632899 [INFO] [parameter_bridge-4]: process has finished cleanly [pid 198862]
+1789289438.1550045 [ERROR] [lqr_node-7]: process[lqr_node-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789289438.1563637 [ERROR] [gz-1]: process[gz-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+1789289438.1572850 [INFO] [lqr_node-7]: sending signal 'SIGTERM' to process[lqr_node-7]
+1789289438.1593037 [INFO] [gz-1]: sending signal 'SIGTERM' to process[gz-1]
+1789289443.1548705 [ERROR] [lqr_node-7]: process[lqr_node-7] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+1789289443.1567793 [ERROR] [gz-1]: process[gz-1] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+1789289443.1579857 [INFO] [lqr_node-7]: sending signal 'SIGKILL' to process[lqr_node-7]
+1789289443.1600142 [INFO] [gz-1]: sending signal 'SIGKILL' to process[gz-1]
+1789289443.1702282 [ERROR] [lqr_node-7]: process has died [pid 198867, exit code -9, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/lqr_node --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/lqr.yaml --params-file /tmp/launch_params_3upp3zg9'].
+1789289443.1810069 [ERROR] [gz-1]: process has died [pid 198859, exit code -9, cmd 'gz sim -s -v 3 /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/worlds/balance.sdf'].

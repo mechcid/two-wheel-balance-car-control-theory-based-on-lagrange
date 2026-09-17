@@ -1,0 +1,86 @@
+1789106765.8132305 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-14-06-05-810796-akxlg-28
+1789106765.8136148 [INFO] [launch]: Default logging verbosity is set to INFO
+1789106766.1108241 [INFO] [gz-1]: process started with pid [42]
+1789106766.1112044 [INFO] [robot_state_publisher-2]: process started with pid [43]
+1789106766.1113839 [INFO] [parameter_bridge-3]: process started with pid [44]
+1789106766.1115236 [INFO] [create-4]: process started with pid [45]
+1789106766.1116364 [INFO] [spawner-5]: process started with pid [46]
+1789106766.1117430 [INFO] [lqr_node-6]: process started with pid [47]
+1789106766.1817088 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1821916 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1823652 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1852527 [robot_state_publisher-2] [37;1m2026-09-11 14:06:06.184 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1789106766.1858068 [robot_state_publisher-2] [37;1m2026-09-11 14:06:06.184 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1789106766.1873808 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1881418 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1899149 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1901815 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1903563 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1909142 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1911404 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1912990 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1978450 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.1997895 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2052417 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2104259 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2108438 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2115459 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2119136 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2132978 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2140203 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2146409 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2148311 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2160647 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2166033 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2171824 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2173574 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2217755 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2262952 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2270551 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2287009 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2295401 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2400160 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2414777 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2424352 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2502964 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2505164 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2506170 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2527726 [parameter_bridge-3] [37;1m2026-09-11 14:06:06.251 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1789106766.2536206 [parameter_bridge-3] [37;1m2026-09-11 14:06:06.252 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1789106766.2546597 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2552032 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2556345 [robot_state_publisher-2] [WARN] [1789106766.255306724] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789106766.2560165 [robot_state_publisher-2] [INFO] [1789106766.255672517] [robot_state_publisher]: Robot initialized
+1789106766.2564130 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2565272 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2566183 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2566934 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2570221 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2571297 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2620034 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2636857 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2642624 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2648666 [robot_state_publisher-2] getifaddrs: Operation not permitted
+1789106766.2677712 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2694156 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2698553 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2701647 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2704165 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2706656 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2707424 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2709799 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2712059 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2713943 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2714694 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2717075 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2717800 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2739632 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2764132 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2769022 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2776339 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2779303 [parameter_bridge-3] getifaddrs: Operation not permitted
+1789106766.2820663 [parameter_bridge-3] error in getifaddrs: Unknown error -1
+1789106766.3935621 [ERROR] [parameter_bridge-3]: process has died [pid 44, exit code 255, cmd '/opt/ros/jazzy/lib/ros_gz_bridge/parameter_bridge --ros-args --params-file /tmp/launch_params_8p3ek3ns'].
+1789106766.4982922 [ERROR] [gz-1]: process has died [pid 42, exit code -11, cmd 'gz sim -s -v 3 /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/worlds/balance.sdf'].
+1789106766.5084944 [ERROR] [create-4]: process has died [pid 45, exit code 255, cmd '/opt/ros/jazzy/lib/ros_gz_sim/create -world balance_world -name balance -topic robot_description -z 0.10010000000000001 -P 0.04 -Y 0.0 --ros-args'].
+1789106771.2560523 [ERROR] [spawner-5]: process has died [pid 46, exit code 1, cmd '/opt/ros/jazzy/lib/controller_manager/spawner joint_state_broadcaster wheel_effort --controller-manager-timeout 120 --ros-args'].

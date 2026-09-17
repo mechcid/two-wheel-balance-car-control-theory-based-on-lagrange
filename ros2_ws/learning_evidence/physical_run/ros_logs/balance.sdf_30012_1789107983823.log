@@ -1,0 +1,55 @@
+[INFO] [1789107983.836776909] [gz_ros_control]: Loading controller_manager
+[INFO] [1789107983.842895551] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[WARN] [1789107983.842918105] [controller_manager]: The resource manager is not yet initialized, will wait for the robot description to initialize it..
+[INFO] [1789107983.846817926] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[WARN] [1789107983.846851994] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[INFO] [1789107984.368752727] [controller_manager]: Received robot description from topic.
+[INFO] [1789107984.368922200] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
+[INFO] [1789107984.377637003] [gz_ros_control]: The position_proportional_gain has been set to: 0.1
+[INFO] [1789107984.377749407] [gz_ros_control]: Loading joint: left_wheel_joint
+[INFO] [1789107984.377761868] [gz_ros_control]: 	State:
+[INFO] [1789107984.377772861] [gz_ros_control]: 		 position
+[INFO] [1789107984.377784030] [gz_ros_control]: 		 velocity
+[INFO] [1789107984.377799580] [gz_ros_control]: 		 effort
+[INFO] [1789107984.377806189] [gz_ros_control]: 	Command:
+[INFO] [1789107984.377812260] [gz_ros_control]: 		 effort
+[INFO] [1789107984.377834049] [gz_ros_control]: Loading joint: right_wheel_joint
+[INFO] [1789107984.377840646] [gz_ros_control]: 	State:
+[INFO] [1789107984.377846921] [gz_ros_control]: 		 position
+[INFO] [1789107984.377852408] [gz_ros_control]: 		 velocity
+[INFO] [1789107984.377859404] [gz_ros_control]: 		 effort
+[INFO] [1789107984.377865082] [gz_ros_control]: 	Command:
+[INFO] [1789107984.377870649] [gz_ros_control]: 		 effort
+[INFO] [1789107984.377935105] [gz_ros_control]: Loading sensor: imu
+[INFO] [1789107984.377954008] [gz_ros_control]: 	State:
+[WARN] [1789107984.377962540] [gz_ros_control]: IMU sensor 'imu' not found in hardware_info, skipping.
+[INFO] [1789107984.378052437] [controller_manager]: Initialize hardware 'GazeboSimSystem' 
+[WARN] [1789107984.378070036] [controller_manager.hardware_component.system.GazeboSimSystem]: Executor is not available during hardware component initialization for 'GazeboSimSystem'. Skipping node creation!
+[INFO] [1789107984.378132518] [controller_manager]: Successful initialization of hardware 'GazeboSimSystem'
+[INFO] [1789107984.378246644] [controller_manager]: Activating component 'GazeboSimSystem'.
+[INFO] [1789107984.378260476] [resource_manager]: 'configure' hardware 'GazeboSimSystem' 
+[INFO] [1789107984.378266245] [gz_ros_control]: System Successfully configured!
+[INFO] [1789107984.378272281] [resource_manager]: Successful 'configure' of hardware 'GazeboSimSystem'
+[INFO] [1789107984.378280103] [resource_manager]: 'activate' hardware 'GazeboSimSystem' 
+[INFO] [1789107984.378295758] [resource_manager]: Successful 'activate' of hardware 'GazeboSimSystem'
+[WARN] [1789107984.378377847] [controller_manager]: Component 'GazeboSimSystem' does not have read or write statistics initialized, skipping registration.
+[INFO] [1789107984.378386335] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[INFO] [1789107984.432742779] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[INFO] [1789107984.432851025] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[INFO] [1789107984.448379298] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[INFO] [1789107984.461357920] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[INFO] [1789107984.461521367] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[INFO] [1789107984.472874645] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
+[INFO] [1789107985.865584182] [controller_manager]: Successfully switched controllers!
+[INFO] [1789107987.093350718] [controller_manager]: Loading controller : 'wheel_effort' of type 'effort_controllers/JointGroupEffortController'
+[INFO] [1789107987.093392213] [controller_manager]: Loading controller 'wheel_effort'
+[INFO] [1789107987.096882564] [controller_manager]: Controller 'wheel_effort' node arguments: --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/controllers.yaml -p use_sim_time:=true --param use_sim_time:=true 
+[INFO] [1789107989.405998433] [controller_manager]: Configuring controller: 'wheel_effort'
+[INFO] [1789107989.409035088] [wheel_effort]: configure successful
+[INFO] [1789107991.711695721] [controller_manager]: Activating controllers: [ wheel_effort ]
+[INFO] [1789107994.033345593] [wheel_effort]: activate successful
+[INFO] [1789107994.033467190] [controller_manager]: Successfully switched controllers!
+[INFO] [1789108028.705665902] [controller_manager.pal_statistics]: Async messages lost 0
+[INFO] [1789108028.705719955] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[INFO] [1789108028.707385829] [controller_manager.pal_statistics]: Async messages lost 0
+[INFO] [1789108028.707418324] [controller_manager.pal_statistics]: publish_async_failures_ 0

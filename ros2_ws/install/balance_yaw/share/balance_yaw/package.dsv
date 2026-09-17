@@ -1,0 +1,9 @@
+source;share/balance_yaw/hook/pythonpath.ps1
+source;share/balance_yaw/hook/pythonpath.dsv
+source;share/balance_yaw/hook/pythonpath.sh
+source;share/balance_yaw/hook/ament_prefix_path.ps1
+source;share/balance_yaw/hook/ament_prefix_path.dsv
+source;share/balance_yaw/hook/ament_prefix_path.sh
+source;../../build/balance_yaw/share/balance_yaw/hook/pythonpath_develop.ps1
+source;../../build/balance_yaw/share/balance_yaw/hook/pythonpath_develop.dsv
+source;../../build/balance_yaw/share/balance_yaw/hook/pythonpath_develop.sh

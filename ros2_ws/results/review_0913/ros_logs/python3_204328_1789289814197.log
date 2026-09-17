@@ -1,0 +1,5 @@
+[INFO] [1789289816.892517802] [balance_interaction_test]: 已请求 x 扰动 +1，持续 0.1 仿真秒
+[INFO] [1789289828.920013109] [balance_interaction_test]: 已请求 x 扰动 -1，持续 0.1 仿真秒
+[INFO] [1789289840.941913439] [balance_interaction_test]: 已请求 yaw 扰动 +0.05，持续 0.1 仿真秒
+[INFO] [1789289852.968171590] [balance_interaction_test]: 已请求 yaw 扰动 -0.05，持续 0.1 仿真秒
+[INFO] [1789289864.994474773] [balance_interaction_test]: 已请求 x 扰动 +1，持续 0.1 仿真秒

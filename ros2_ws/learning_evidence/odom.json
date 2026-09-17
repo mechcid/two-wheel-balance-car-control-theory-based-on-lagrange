@@ -1,0 +1,12 @@
+{
+  "purpose": "核实里程计父子frame和twist内容",
+  "command": [
+    "ros2",
+    "topic",
+    "echo",
+    "/balance/odometry",
+    "--once"
+  ],
+  "returncode": 0,
+  "output": "header:\n  stamp:\n    sec: 0\n    nanosec: 5000000\n  frame_id: world\nchild_frame_id: base_link\npose:\n  pose:\n    position:\n      x: 6.352747104407253e-22\n      y: 0.0\n      z: 0.09995285000000002\n    orientation:\n      x: 0.0\n      y: 0.01999866669333308\n      z: 0.0\n      w: 0.9998000066665778\n  covariance:\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\ntwist:\n  twist:\n    linear:\n      x: -0.9992619803891295\n      y: 0.0\n      z: 24.968224595267188\n    angular:\n      x: 0.0\n      y: 10.000000000000554\n      z: 0.0\n  covariance:\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n  - 0.0\n---\n"
+}

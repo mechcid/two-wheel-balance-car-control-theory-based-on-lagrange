@@ -1,0 +1,11 @@
+{
+  "purpose": "核实用户节点声明的参数",
+  "command": [
+    "ros2",
+    "param",
+    "list",
+    "/balance_lqr"
+  ],
+  "returncode": 0,
+  "output": "  control_frequency\n  disturbance\n  duration\n  gain\n  log_path\n  nominal_heading\n  probe_torque\n  reference_state\n  start_type_description_service\n  torque_limit\n  use_sim_time\n"
+}

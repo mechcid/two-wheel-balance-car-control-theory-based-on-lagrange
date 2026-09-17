@@ -1,0 +1,2 @@
+[console_scripts]
+yaw_node = balance_yaw.controller:main

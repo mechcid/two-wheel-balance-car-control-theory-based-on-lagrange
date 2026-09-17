@@ -1,0 +1,3 @@
+1789098906.0378678 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-11-55-06-036682-akxlg-2
+1789098906.0380044 [INFO] [launch]: Default logging verbosity is set to INFO
+1789098906.1433909 [ERROR] [launch]: Caught exception in launch (see debug for traceback): "package 'controller_manager' not found, searching: ['/home/mechcid/lagarain/ros2_ws/install/balance_sim', '/opt/ros/jazzy']"

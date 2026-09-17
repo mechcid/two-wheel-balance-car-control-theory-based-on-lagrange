@@ -1,0 +1,17 @@
+# DEMO ONLY: imported from simulation/outputs/results.json. I_Bxx and wheel_width are added example values.
+I_Bxx: 0.1
+I_Byy: 0.08
+I_Bzz: 0.06
+I_Lyy: 0.0025
+I_Lzz: 0.00125
+I_Ryy: 0.0025
+I_Rzz: 0.00125
+d: 0.4
+g: 9.81
+l: 0.3
+m_B: 2.0
+m_L: 0.5
+m_R: 0.5
+psi0: 0.0
+r: 0.1
+wheel_width: 0.025

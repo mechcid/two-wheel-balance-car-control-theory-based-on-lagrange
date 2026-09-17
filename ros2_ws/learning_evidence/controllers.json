@@ -1,0 +1,13 @@
+{
+  "purpose": "确认两项控制器都active",
+  "command": [
+    "ros2",
+    "service",
+    "call",
+    "/controller_manager/list_controllers",
+    "controller_manager_msgs/srv/ListControllers",
+    "{}"
+  ],
+  "returncode": 0,
+  "output": "waiting for service to become available...\nrequester: making request: controller_manager_msgs.srv.ListControllers_Request()\n\nresponse:\ncontroller_manager_msgs.srv.ListControllers_Response(controller=[controller_manager_msgs.msg.ControllerState(name='wheel_effort', state='active', type='effort_controllers/JointGroupEffortController', is_async=False, update_rate=1000, claimed_interfaces=['left_wheel_joint/effort', 'right_wheel_joint/effort'], required_command_interfaces=['left_wheel_joint/effort', 'right_wheel_joint/effort'], required_state_interfaces=[], is_chainable=False, is_chained=False, exported_state_interfaces=[], reference_interfaces=[], chain_connections=[]), controller_manager_msgs.msg.ControllerState(name='joint_state_broadcaster', state='active', type='joint_state_broadcaster/JointStateBroadcaster', is_async=False, update_rate=1000, claimed_interfaces=[], required_command_interfaces=[], required_state_interfaces=['left_wheel_joint/position', 'left_wheel_joint/velocity', 'left_wheel_joint/effort', 'right_wheel_joint/position', 'right_wheel_joint/velocity', 'right_wheel_joint/effort'], is_chainable=False, is_chained=False, exported_state_interfaces=[], reference_interfaces=[], chain_connections=[])])\n\n"
+}

@@ -1,0 +1,25 @@
+{
+  "source": "Gazebo ROS CSV, not linear solve_ivp",
+  "duration": 15.99,
+  "tail_max_abs": {
+    "x": 1.809226201726326e-15,
+    "psi": 0.03991129694901981,
+    "theta": 5.017812673579019e-16,
+    "xdot": 4.32383532140005e-14,
+    "psidot": 6.332209133498669e-06,
+    "thetadot": 1.715766585845633e-14
+  },
+  "limits": {
+    "x": 0.01,
+    "psi": 0.01,
+    "theta": 0.005,
+    "xdot": 0.02,
+    "psidot": 0.02,
+    "thetadot": 0.02
+  },
+  "saturation_fraction": 0.0,
+  "peak_torque": 0.02000000000000006,
+  "max_sample_gap": 0.006000000000000227,
+  "max_torque_step": 2.3065031202230968e-06,
+  "converged": false
+}

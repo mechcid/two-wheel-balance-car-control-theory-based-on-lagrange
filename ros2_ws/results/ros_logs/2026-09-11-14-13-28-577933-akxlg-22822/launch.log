@@ -1,0 +1,30 @@
+1789107208.5789232 [INFO] [launch]: All log files can be found below /home/mechcid/lagarain/ros2_ws/results/ros_logs/2026-09-11-14-13-28-577933-akxlg-22822
+1789107208.5790226 [INFO] [launch]: Default logging verbosity is set to INFO
+1789107208.6560416 [INFO] [gz-1]: process started with pid [22837]
+1789107208.6561673 [INFO] [robot_state_publisher-2]: process started with pid [22838]
+1789107208.6562130 [INFO] [parameter_bridge-3]: process started with pid [22839]
+1789107208.6562490 [INFO] [create-4]: process started with pid [22840]
+1789107208.6562808 [INFO] [spawner-5]: process started with pid [22843]
+1789107208.6563082 [INFO] [lqr_node-6]: process started with pid [22844]
+1789107208.6886516 [robot_state_publisher-2] [WARN] [1789107208.688441397] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+1789107208.6888907 [robot_state_publisher-2] [INFO] [1789107208.688546386] [robot_state_publisher]: Robot initialized
+1789107209.2375355 [INFO] [create-4]: process has finished cleanly [pid 22840]
+1789107209.7127042 [parameter_bridge-3] [INFO] [1789107209.712291081] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+1789107209.7138793 [parameter_bridge-3] [INFO] [1789107209.713694296] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/imu (gz.msgs.IMU) -> /balance/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+1789107209.7174542 [parameter_bridge-3] [INFO] [1789107209.717293028] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/balance/odometry (gz.msgs.Odometry) -> /balance/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+1789107209.7200129 [parameter_bridge-3] [INFO] [1789107209.719771195] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/persistent (ros_gz_interfaces/msg/EntityWrench) -> /world/balance_world/wrench/persistent (gz.msgs.EntityWrench)] (Lazy 0)
+1789107209.7231514 [parameter_bridge-3] [INFO] [1789107209.722968209] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/world/balance_world/wrench/clear (ros_gz_interfaces/msg/Entity) -> /world/balance_world/wrench/clear (gz.msgs.Entity)] (Lazy 0)
+1789107225.5318983 [INFO] [spawner-5]: process has finished cleanly [pid 22843]
+1789107225.9088562 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1789107225.9126415 [INFO] [lqr_node-6]: sending signal 'SIGINT' to process[lqr_node-6]
+1789107225.9140201 [INFO] [parameter_bridge-3]: sending signal 'SIGINT' to process[parameter_bridge-3]
+1789107225.9149444 [INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+1789107225.9157650 [INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+1789107225.9160900 [parameter_bridge-3] [INFO] [1789107225.908570157] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107225.9163053 [robot_state_publisher-2] [INFO] [1789107225.908617068] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107225.9174109 [parameter_bridge-3] [INFO] [1789107225.914284758] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107225.9180815 [robot_state_publisher-2] [INFO] [1789107225.915141621] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1789107226.0249717 [INFO] [parameter_bridge-3]: process has finished cleanly [pid 22839]
+1789107226.0275989 [INFO] [robot_state_publisher-2]: process has finished cleanly [pid 22838]
+1789107226.0874212 [ERROR] [lqr_node-6]: process has died [pid 22844, exit code 1, cmd '/home/mechcid/lagarain/ros2_ws/install/balance_sim/lib/balance_sim/lqr_node --ros-args --params-file /home/mechcid/lagarain/ros2_ws/install/balance_sim/share/balance_sim/config/lqr.yaml --params-file /tmp/launch_params_9lxsi44o'].
+1789107226.0944426 [INFO] [gz-1]: process has finished cleanly [pid 22837]

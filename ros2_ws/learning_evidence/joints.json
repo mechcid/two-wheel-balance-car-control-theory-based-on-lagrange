@@ -1,0 +1,12 @@
+{
+  "purpose": "核实关节名称、相对角、角速度、effort输出",
+  "command": [
+    "ros2",
+    "topic",
+    "echo",
+    "/joint_states",
+    "--once"
+  ],
+  "returncode": 0,
+  "output": "header:\n  stamp:\n    sec: 0\n    nanosec: 4000000\n  frame_id: base_link\nname:\n- left_wheel_joint\n- right_wheel_joint\nposition:\n- 0.0\n- 0.0\nvelocity:\n- 0.0\n- 0.0\neffort:\n- 0.0\n- 0.0\n---\n"
+}
