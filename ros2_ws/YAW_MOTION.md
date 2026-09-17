@@ -16,9 +16,9 @@ psi通过相邻姿态差展开，不在±π突然跳变；l使用当前朝向上
 
 |路径|作用|
 |---|---|
-|`../theory/yaw_motion/README.md`|含持续偏航耦合项的完整公式与符号对应|
-|`../theory/yaw_motion/derive.py`|精确六坐标能量、拉格朗日算子和非完整投影|
-|`../theory/yaw_motion/derivation.ipynb`|已执行、可渲染阅读的新笔记本|
+|`../theory/README.md`|含持续偏航耦合项的完整公式与符号对应|
+|`../theory/turning_balance/lagrange.py`|精确六坐标能量、拉格朗日算子和非完整投影|
+|`../theory/turning_balance/lagrange.ipynb`|已执行、可渲染阅读的新笔记本|
 |`../simulation/yaw_motion/design_and_check.py`|移动参考线性化、CARE、新K、旧模型回归、非线性数值积分|
 |`../simulation/yaw_motion/check_projection.py`|独立9×9乘子法随机数值对照|
 |`src/balance_yaw/balance_yaw/dynamics.py`|数值M、h、输入映射、雅可比、平滑参考|
@@ -34,7 +34,7 @@ psi通过相邻姿态差展开，不在±π突然跳变；l使用当前朝向上
 
 ## 公式到控制器的衔接
 
-完整推导见 [理论说明](../theory/yaw_motion/README.md)。新模型为
+完整推导见 [理论说明](../theory/README.md)。新模型为
 
 \[
 M(\theta)\dot u+h(\theta,v,\omega,p)=B_\tau\tau,\qquad u=(v,\omega,p)^T.

@@ -7,7 +7,13 @@ import yaml
 root=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(root/'ros2_ws/src/balance_yaw'))
 from balance_yaw.dynamics import matrices
-ns=runpy.run_path(str(root/'theory/yaw_motion/derive.py'))
+sys.path.insert(0,str(root/'theory'))
+from turning_balance import lagrange as theory
+model=theory.build()
+ns={**model,'q':theory.q,'qd':theory.qd,
+    'r':theory.r,'d':theory.d,'lc':theory.lc,'g':theory.g,
+    'mB':theory.m_B,'mW':theory.mW,'Js':theory.Js,'Jt':theory.Jt,
+    'Ix':theory.I_Bxx,'Iy':theory.I_Byy,'Iz':theory.I_Bzz}
 p=yaml.safe_load((root/'ros2_ws/src/balance_sim/config/physical.yaml').read_text());p['com_height']=p['l']
 subs=dict(zip([ns[k] for k in ['r','d','lc','g','mB','mW','Js','Jt','Ix','Iy','Iz']], [p[k] for k in ['r','d','com_height','g','m_B','m_L','I_Lyy','I_Lzz','I_Bxx','I_Byy','I_Bzz']]))
 q,qd=ns['q'],ns['qd']; A=ns['Acon'];S=ns['S'];uu=ns['u']

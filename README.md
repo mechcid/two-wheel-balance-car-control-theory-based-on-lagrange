@@ -4,11 +4,13 @@
 
 ## 文件结构
 
-- `theory/sympy_scaffold.py`：精确/近似能量、两个拉格朗日分支及最终局部矩阵。
-- `theory/sympy_scaffold.ipynb`：原电子笔记本（移动保留，未重新改写推导）。
-- `theory/build_notebook.py`：直接从同目录主脚本生成笔记本。
-- `theory/SUMMARY.md`：符号推导说明。
-- `theory/archive_kane/`：旧历史文件，不作为当前结论。
+- `theory/README.md`：理论结构、坐标约定、两个场景及阅读顺序。
+- `theory/base.py` / `base.ipynb`：共用位姿、速度和角速度。
+- `theory/straight_balance/`：静止直立六状态拉格朗日和 LQR。
+- `theory/turning_balance/`：偏航运动拉格朗日和七状态轨迹误差 LQR。
+- `theory/update_notebooks.sh`：一键重建并执行五本笔记本。
+- `theory/kane/`：独立存放的历史凯恩方法实验，不参与当前计算。
+- `archive/theory_before_refactor_20260917/`：重构前完整备份。
 - `simulation/lqr_simulation.py`：独立数值程序，顶部 Parameters/Settings 可修改。
 - `simulation/check_matrix_source.py`：数值公式与最终符号矩阵的三个朝向交叉检查。
 - `simulation/check_lagrange.py`：原拉格朗日分支对账，导入路径已更新。
@@ -28,10 +30,10 @@
 
 ```bash
 cd /home/mechcid/lagarain
-.venv/bin/jupyter lab theory/sympy_scaffold.ipynb
+.venv/bin/jupyter lab theory/base.ipynb
 ```
 
-重建笔记本时使用 `theory/build_notebook.py`，再执行 `theory/sympy_scaffold.ipynb`。
+一键重建并执行全部五本笔记本：`./theory/update_notebooks.sh`。
 
 ## 矩阵与坐标核查
 
@@ -71,4 +73,6 @@ Q=diag(10,5,400,5,2,40)，R=diag(10,10)，u=-K_LQR*X。
 
 ## 持续偏航运动独立分支
 
-新增 [l–psi–theta 动力学推导](theory/yaw_motion/README.md) 和 [balance_yaw 启动/物理验收](ros2_ws/YAW_MOTION.md)。运动坐标l为累计前向行程，质心高度改记l_c/com_height；旧静止分支保持。
+新增 [两个场景的理论推导](theory/README.md) 和 [balance_yaw 启动/物理验收](ros2_ws/YAW_MOTION.md)。运动坐标l为累计前向行程，质心高度改记l_c/com_height；旧静止分支保持。
+
+理论转向分支现新增七状态 `[x,y,psi,theta,v,omega,p]` 跟踪模型；现有 ROS `balance_yaw` 的六状态里程控制器保留，尚未替换为七状态版本。

@@ -1,5 +1,5 @@
 """Local upright balance-car simulation. Run from any cwd; outputs beside this file.
-Matrix source: theory/sympy_scaffold.py, M_linear/C_linear/K_linear/B_linear.
+Matrix source: theory/straight_balance/lagrange.py, M_linear/C_linear/K_linear/B_linear.
 World-x convention; psi0=0 aligns world x with nominal forward direction.
 No saturation/nonlinear plant/hardware fidelity is claimed.
 """
@@ -223,7 +223,7 @@ def main():
     report=dict(notice='DEMO ONLY: these are NOT actual robot parameters.',coordinate='World x; psi0=0 equals nominal forward direction',parameters=asdict(PARAMS),settings=asdict(CONFIG),matrices=matrices,metrics=metrics)
     (OUTPUT/'results.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     lines=['# LQR numerical validation','',report['notice'],'',
-           'Source: theory/sympy_scaffold.py final matrices. World x convention. psi0=0.',
+           'Source: theory/straight_balance/lagrange.py final matrices. World x convention. psi0=0.',
            'No saturation, delay, nonlinear plant, or measured actuator limits modeled.','',
            '## Parameters','```json',json.dumps(asdict(PARAMS),indent=2),'```']
     for name in ['M0','C0','K0','B0','A','B','K_LQR','Q','R']:

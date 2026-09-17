@@ -6,6 +6,7 @@ from functools import lru_cache
 import sympy as s
 q=s.Matrix(s.symbols('x y psi theta theta_L theta_R', real=True))
 x,y,psi,theta,theta_L,theta_R=q
+# dx 等是内部广义速度符号；笔记本通过 symbol_names 显示为对应坐标的上点形式。
 qd=s.Matrix(s.symbols('dx dy dpsi dtheta dtheta_L dtheta_R', real=True))
 qdd=s.Matrix(s.symbols('ddx ddy ddpsi ddtheta ddtheta_L ddtheta_R', real=True))
 r,d,lc,g=s.symbols('r d l_c g', positive=True)
@@ -20,8 +21,10 @@ def rz(a): return s.Matrix([[s.cos(a),-s.sin(a),0],[s.sin(a),s.cos(a),0],[0,0,1]
 def homogeneous(R,p): return R.row_join(p).col_join(s.Matrix([[0,0,0,1]]))
 def skew(w): return s.Matrix([[0,-w[2],w[1]],[w[2],0,-w[0]],[-w[1],w[0],0]])
 def dt(a):
-    """仅依赖 q,qd 的标量/矩阵全导数，保留独立 qdd。"""
-    return a.diff(x)*qd[0]+sum((a.diff(q[i])*qd[i] for i in range(1,6)),s.zeros(*a.shape)) if isinstance(a,s.MatrixBase) else sum(s.diff(a,z)*v for z,v in zip(q,qd))
+    """沿 qdot=qd、qdd 的时间全导数；可用于标量或矩阵。"""
+    def scalar(e):
+        return sum(s.diff(e,z)*rate for z,rate in zip(q,qd))+sum(s.diff(e,z)*rate for z,rate in zip(qd,qdd))
+    return a.applyfunc(scalar) if isinstance(a,s.MatrixBase) else scalar(a)
 
 @lru_cache(None)
 def kinematics():

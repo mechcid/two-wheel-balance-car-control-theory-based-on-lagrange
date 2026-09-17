@@ -1,0 +1,19 @@
+{
+  "straight_multiplier_projection_max_error": 1.7763568394002505e-14,
+  "turning_multiplier_projection_max_error": 7.105427357601002e-15,
+  "straight_rank": 6,
+  "turning_rank": 7,
+  "finite_difference_error": 3.091571443292196e-11,
+  "world_rotating_equivalence_error": 4.087399385135978e-11,
+  "nonlinear_final_max_error": 6.209877417839849e-09,
+  "turning_care_residual": 4.974465284135476e-12,
+  "turning_closed_poles": [
+    "(-49.85054557443945+0j)",
+    "(-10.20103834008691+0j)",
+    "(-3.199308721018119+0j)",
+    "(-0.6619119402245963+0.6823548821028002j)",
+    "(-0.6619119402245963-0.6823548821028002j)",
+    "(-0.46811817622414686+0j)",
+    "(-1.594925066077174+0j)"
+  ]
+}
