@@ -16,6 +16,8 @@ ns={**model,'q':theory.q,'qd':theory.qd,
     'Ix':theory.I_Bxx,'Iy':theory.I_Byy,'Iz':theory.I_Bzz}
 p=yaml.safe_load((root/'ros2_ws/src/balance_sim/config/physical.yaml').read_text());p['com_height']=p['l']
 subs=dict(zip([ns[k] for k in ['r','d','lc','g','mB','mW','Js','Jt','Ix','Iy','Iz']], [p[k] for k in ['r','d','com_height','g','m_B','m_L','I_Lyy','I_Lzz','I_Bxx','I_Byy','I_Bzz']]))
+# 历史 ROS 示例仍是对角惯量；不把新 CAD 控制器混入旧验收。
+subs.update({theory.I_Bxy:0,theory.I_Bxz:0,theory.I_Byz:0})
 q,qd=ns['q'],ns['qd']; A=ns['Acon'];S=ns['S'];uu=ns['u']
 M6=s.lambdify((q,qd),ns['M6'].subs(subs),'numpy');h6=s.lambdify((q,qd),ns['h6'].subs(subs),'numpy')
 Ac=s.lambdify((q,),A.subs(subs),'numpy');Af=s.lambdify((q,qd),(A*qd).jacobian(q).subs(subs)*qd,'numpy')

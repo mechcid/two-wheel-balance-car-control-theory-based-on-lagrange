@@ -33,6 +33,9 @@ class Parameters:
     I_Rzz: float = 0.00125
     I_Byy: float = 0.080
     I_Bzz: float = 0.060
+    I_Bxy: float = 0.0
+    I_Bxz: float = 0.0
+    I_Byz: float = 0.0
     g: float = 9.81
     psi0: float = 0.0               # rad; world-x chart requires cos(psi0) != 0
 
@@ -59,7 +62,7 @@ def build_M0(p=PARAMS):
     """把质量、尺寸和惯量代入符号推导的最终公式，返回 3×3 质量矩阵。
     不重新推导动力学。这里仍是世界 x，psi0=0 时与名义前进方向一致。"""
     for name, value in asdict(p).items():
-        if not np.isfinite(value) or (name != 'psi0' and value <= 0):
+        if not np.isfinite(value) or (name not in ('psi0','I_Bxy','I_Bxz','I_Byz') and value <= 0):
             raise ValueError(f'Invalid parameter {name}={value}')
     c = np.cos(p.psi0)
     if abs(c) < 1e-6:
@@ -68,8 +71,8 @@ def build_M0(p=PARAMS):
     coupling = p.d/2*((p.I_Ryy-p.I_Lyy)/p.r**2 + p.m_R-p.m_L)
     return np.array([
         [(p.m_B+p.m_L+p.m_R+wheel_mass)/c**2, coupling/c, p.l*p.m_B/c],
-        [coupling/c, p.I_Bzz+p.I_Lzz+p.I_Rzz + p.d**2/4*(wheel_mass+p.m_L+p.m_R), 0.],
-        [p.l*p.m_B/c, 0., p.I_Byy+p.l**2*p.m_B]])
+        [coupling/c, p.I_Bzz+p.I_Lzz+p.I_Rzz + p.d**2/4*(wheel_mass+p.m_L+p.m_R), p.I_Byz],
+        [p.l*p.m_B/c, p.I_Byz, p.I_Byy+p.l**2*p.m_B]])
 
 def build_state_space(p=PARAMS):
     """将 M0*zdd+C0*zd+K0*z=B0*u 转成 Xdot=A*X+B*u。

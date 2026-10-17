@@ -23,19 +23,23 @@ def build():
     a=m_B+2*mW+2*Js/r**2; c=m_B*l; e=I_Byy+m_B*l**2
     J=I_Bzz+2*Jt+d**2*mW/2+d**2*Js/(2*r**2)
     D=I_Bxx-I_Bzz+m_B*l**2
+    F=I_Byz*s.cos(theta)-I_Bxy*s.sin(theta)
+    G=-I_Bxz*s.sin(2*theta)
+    delta_M=s.Matrix([[0,0,0],[0,G,F],[0,F,0]])
+    delta_h=s.Matrix([0,s.diff(G,theta)*p*omega+s.diff(F,theta)*p**2,-s.diff(G,theta)*omega**2/2])
     expected=s.Matrix([[a,0,c*s.cos(theta)],[0,J+D*s.sin(theta)**2,0],[c*s.cos(theta),0,e]])
-    assert clean(model['M']-expected)==s.zeros(3)
+    assert clean(model['M']-expected-delta_M)==s.zeros(3)
     expected_h=s.Matrix([-c*s.sin(theta)*(p**2+omega**2),
         (2*D*s.sin(theta)*s.cos(theta)*p+c*s.sin(theta)*v)*omega,
         -D*s.sin(theta)*s.cos(theta)*omega**2-c*g*s.sin(theta)])
-    assert clean(model['h']-expected_h)==s.zeros(3,1)
+    assert clean(model['h']-expected_h-delta_h)==s.zeros(3,1)
     # 能量功率恒等式独立于控制器，防止漏掉转向耦合项。
     Tr=clean(T.subs(dict(zip(qd,S*u)),simultaneous=True)); E=Tr+V
     ud=s.Matrix(s.symbols('dv domega dp'))
     Edot=s.diff(E,theta)*p+(s.Matrix([s.diff(E,z) for z in u]).T*ud)[0]
     assert clean(Edot-(u.T*(model['M']*ud+model['h']))[0])==0
     model.update(T_reduced=Tr,M_small=Msmall,h_small=hsmall,
-                 coefficients=s.Matrix([a,c,e,J,D]))
+                 coefficients=s.Matrix([a,c,e,J,D]),delta_M=delta_M,delta_h=delta_h)
     return model
 if __name__=='__main__':
     for key in ('M','h','B','M_small','h_small'): print(key,'=',build()[key])

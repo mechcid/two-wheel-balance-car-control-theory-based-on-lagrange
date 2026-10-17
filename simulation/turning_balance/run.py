@@ -1,4 +1,4 @@
-"""七状态跟踪：近似动力学主线 + 精确动力学对照；s只是积分记录，不增加反馈维数。"""
+"""七状态跟踪：精确动力学主线 + 小俯仰对照；s只是积分记录，不增加反馈维数。"""
 from pathlib import Path
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -13,10 +13,22 @@ def plants():
     for name,mkey,hkey in [('small_pitch','M_small','h_small'),('exact','M','h')]:
         mf=sym.lambdify((theta,),m[mkey].subs(sub),'numpy',cse=True)
         hf=sym.lambdify((theta,v,omega,p),m[hkey].subs(sub),'numpy',cse=True)
+        dmf=sym.lambdify((theta,),m[mkey].diff(theta).subs(sub),'numpy',cse=True)
+        dhf=sym.lambdify((theta,v,omega,p),m[hkey].jacobian(sym.Matrix([theta,v,omega,p])).subs(sub),'numpy',cse=True)
+        def jac(z,tau,mf=mf,hf=hf,dmf=dmf,dhf=dhf):
+            _,_,heading,th,vv,w,pp,_=z
+            M=mf(th);acc=np.linalg.solve(M,B@tau-np.asarray(hf(th,vv,w,pp)).ravel())
+            partial=-np.asarray(dhf(th,vv,w,pp));partial[:,0]-=dmf(th)@acc
+            A=np.zeros((8,8));A[0,2]=-vv*np.sin(heading);A[0,4]=np.cos(heading)
+            A[1,2]=vv*np.cos(heading);A[1,4]=np.sin(heading);A[2,5]=1;A[3,6]=1;A[7,4]=1
+            A[4:7,3:7]=np.linalg.solve(M,partial)
+            Bstate=np.zeros((8,2));Bstate[4:7]=np.linalg.solve(M,B)
+            return A,Bstate
         def rhs(z,tau,mf=mf,hf=hf):
             x,y,psi,th,vv,w,pp,travel=z
             acc=np.linalg.solve(mf(th),B@tau-np.asarray(hf(th,vv,w,pp)).ravel())
             return np.r_[vv*np.cos(psi),vv*np.sin(psi),w,pp,acc,vv]
+        rhs.jac=jac
         out[name]=rhs
     return out
 
@@ -29,13 +41,18 @@ def run_all():
         model=design(v0,w0);K=model['K']
         def ref(t):return np.r_[reference(t,v0,w0,heading),v0*t]
         def error(t,z):return error_transform(heading+w0*t)@(z[:7]-ref(t)[:7])
-        def control(t,z):return -K@error(t,z)
+        def control(t,z):return model['tau_ref']-K@error(t,z)
         # 扰动定义为轮-车体关节上的附加力矩，使用同一B；不是凭空当作车体外力。
         def disturbance(t):return np.array([.025,.025]) if pulse and 8<=t<8.2 else np.zeros(2)
         z0=ref(0)+np.array([.01,-.01,.01,.03,0,0,0,0.]);runs={}
         for plant_name,plant in plant_models.items():
             def rhs(t,z):return plant(z,np.clip(control(t,z),-TORQUE_LIMIT,TORQUE_LIMIT)+disturbance(t))
-            t,z=integrate(rhs,z0,35,stops=(8,8.2) if pulse else ())
+            def jac(t,z):
+                requested=control(t,z);torque=np.clip(requested,-TORQUE_LIMIT,TORQUE_LIMIT)+disturbance(t)
+                A,Bstate=plant.jac(z,torque)
+                gain=np.column_stack([K@error_transform(heading+w0*t),np.zeros(2)])
+                return A-Bstate@np.diag((abs(requested)<TORQUE_LIMIT).astype(float))@gain
+            t,z=integrate(rhs,z0,35,stops=(8,8.2) if pulse else (),jac=jac)
             refs=np.array([ref(tt) for tt in t]);raw=np.array([control(tt,zz) for tt,zz in zip(t,z)])
             applied=np.clip(raw,-TORQUE_LIMIT,TORQUE_LIMIT);dist=np.array([disturbance(tt) for tt in t])
             err=z-refs  # CSV是世界误差，控制器使用旋转位置误差；s不在控制目标里。

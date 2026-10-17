@@ -15,7 +15,10 @@ def run_all():
         def rhs(t,z):return A@z+B@np.clip(control(z),-TORQUE_LIMIT,TORQUE_LIMIT)
         def cutoff(t,z):return .2-abs(z[2])
         cutoff.terminal=True;cutoff.direction=-1
-        t,z=integrate(rhs,z0,20 if closed else 2,event=None if closed else cutoff)
+        def jac(t,z):
+            active=(abs(control(z))<TORQUE_LIMIT).astype(float)
+            return A-B@np.diag(active)@K if closed else A
+        t,z=integrate(rhs,z0,20 if closed else 2,event=None if closed else cutoff,jac=jac)
         refs=np.tile(ref,(len(t),1));raw=np.array([control(zz) for zz in z]);applied=np.clip(raw,-TORQUE_LIMIT,TORQUE_LIMIT)
         summary[name]=save_case(out,name,t,z,refs,z-refs,raw,applied,np.zeros_like(raw),LABELS,model,
            {'plant':'local_linear','open_loop_cutoff_rad':.2,'mass_matrix':model['M']})

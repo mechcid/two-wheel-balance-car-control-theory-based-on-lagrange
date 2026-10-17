@@ -5,6 +5,12 @@ from base import q,qd,psi,theta,r,d,clean,constraints
 from turning_balance.lagrange import build as turning_build, v,omega,p,wheel_symmetry
 from straight_balance.lagrange import build as straight_build,psi_0
 
+def clean(a):
+    # world-x 消元含 sec/tan 有理式，保留适用于该表达式的匹配化简；
+    # 基础刚体动力学使用 base.clean 的 Fu 多项式三角化简。
+    def scalar(e): return s.trigsimp(s.expand(e))
+    return a.applyfunc(scalar) if isinstance(a,s.MatrixBase) else scalar(a)
+
 @lru_cache(None)
 def build_bridge():
     model=turning_build();static=straight_build()
@@ -26,6 +32,8 @@ def build_bridge():
         a*s.tan(psi)/s.cos(psi)**2*dx*dpsi-c*s.sin(theta)/s.cos(psi)*(dtheta**2+dpsi**2),
         (2*Dcoef*s.sin(theta)*s.cos(theta)*dtheta+c*s.sin(theta)/s.cos(psi)*dx)*dpsi,
         c*s.cos(theta)/s.cos(psi)*s.tan(psi)*dx*dpsi-Dcoef*s.sin(theta)*s.cos(theta)*dpsi**2+model['V'].diff(theta)])
+    expected_M += model['delta_M']
+    expected_h += model['delta_h'].subs({omega:dpsi,p:dtheta})
     assert clean(Mr-expected_M)==s.zeros(3)
     assert clean(hr-expected_h)==s.zeros(3,1)
 

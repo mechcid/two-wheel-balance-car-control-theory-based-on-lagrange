@@ -1,0 +1,13 @@
+{
+  "source": "SolidWorks text exports; body excludes wheels; axle midpoint origin; user dimensions 2026-10-17",
+  "convention": "SI units; inertia matrix off-diagonal entries are NEGATED positive-notation CAD products; COM x/y deliberately ignored",
+  "parameters": {
+    "r": 0.0325, "d": 0.185, "l": 0.041527,
+    "m_B": 0.831, "m_L": 0.046, "m_R": 0.046,
+    "I_Bxx": 0.004242183, "I_Byy": 0.002739328, "I_Bzz": 0.002748923,
+    "I_Bxy": 0.000582953, "I_Bxz": -0.000000533, "I_Byz": -0.000000159,
+    "I_Lxx": 0.000018339, "I_Lyy": 0.000031441, "I_Lzz": 0.000018339,
+    "I_Rxx": 0.000018339, "I_Ryy": 0.000031441, "I_Rzz": 0.000018339,
+    "g": 9.81, "psi0": 0.0
+  }
+}

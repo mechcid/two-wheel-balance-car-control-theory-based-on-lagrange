@@ -72,15 +72,16 @@ $$v_i^N=\frac{\partial p_i^N}{\partial q}\dot q,
 \quad[\omega_{i/N}^N]_\times=\dot R_{Ni}R_{Ni}^T.$$
 下方是代码实际输出的展开矩阵；两个动力学场景均读取这些结果。'''),code("for name in ('C','B','WL','WR'):\n    show('T_{N'+name+'}',k['T'][name])\n    show('v_{'+name+'}^{N}',k['v'][name])\n    show(r'\\omega_{'+name+'}^{N}',k['omega'][name])\n    show(r'[\\omega_{'+name+r'}^{N}]_{\\times}',k['omega_hat'][name])"),md('## 接触点速度与三个独立约束\n接触点指当前接触位置的轮上材料点，速度用刚体公式计算，不能把持续变化的几何接触位置直接对时间求导。'),code("expressions,Acon,contact=constraints()\nfor name,value in contact.items():show('v_{contact,'+name+'}^{N}',value)\nshow('A_c\\dot q',expressions)\nshow('A_c',Acon)"),md(r'''## 能量接口
 $$T_i=\tfrac12m_i(v_i^N)^Tv_i^N+\tfrac12(\omega_i^N)^T R_{Ni}I_iR_{Ni}^T\omega_i^N.$$
-这里只显示逐刚体精确能量，近似方式由两个场景分别决定。'''),code("parts,T,V=energies()\nfor name,value in parts.items():show('T_{'+name+'}',value)\nshow('V',V)")]
+车体采用完整对称惯量矩阵，非对角元素是正记数法 CAD 惯性积的负值；车轮保持轴对称。
+质心按用户选择简化为 $[0,0,l]^T$，忽略导出的微小水平偏移。这里只显示精确能量。'''),code("parts,T,V=energies()\nfor name,value in parts.items():show('T_{'+name+'}',value)\nshow('V',V)")]
     return cells
 
 def make_lagrange(turning):
     scenario='turning_balance' if turning else 'straight_balance'
     intro=(r'''# 存在偏航运动：第一类与无乘子第二类拉格朗日方程
-$\psi$ 与偏航速度不作小量；只把 $\theta,p=\dot\theta$ 作为俯仰小扰动。
+$\psi$ 与偏航速度不作小量；精确模型是动力学与控制的来源；小俯仰展开仅作解释和对照。
 本分支车轮轴对称且左右相同，$m_W=m_L=m_R$，$J_s=I_{Lyy}=I_{Ryy}$，$J_t=I_{Lxx}=I_{Lzz}=I_{Rxx}=I_{Rzz}$。
-先由共用速度构造精确能量并求导，再展开小俯仰方程，避免丢失 $\theta\omega^2$。
+车体保留完整惯量。先由共用速度构造精确能量并求导，再展示小俯仰方程，避免丢失 $\theta\omega^2$。
 可允许速度为 $u=[v,\omega,p]^T$，$v=\dot s$；$s$ 是累计前向行程（旧版写作 $l$，现已改名）。
 $x,y$ 保持世界位置，$\dot x=v\cos\psi,\dot y=v\sin\psi$，不把 $v$ 冒充世界 $\dot x$。
 ''' if turning else r'''# 固定名义朝向：第一类与无乘子第二类拉格朗日方程
@@ -135,12 +136,14 @@ def make_lqr(turning):
         cells += [md(r'''## 世界状态与参考轨迹
 $$Z=[x,y,\psi,\theta,v,\omega,p]^T,\quad
 \dot Z=[v\cos\psi,v\sin\psi,\omega,p,(M^{-1}(B_\tau\tau-h))^T]^T.$$
-参考选择已有实验的 $v_0=0.1\,m/s,\omega_0=0.4\,rad/s$，$\theta_r=p_r=0$，理想无耗散模型的 $\tau_r=0$。
+参考速度为 $v_0=0.1\,m/s,\omega_0=0.4\,rad/s$。由精确方程求恒定 $\theta_r$ 与 $\tau_r$，令 $p_r=0$、$\dot u_r=0$，使 $B_\tau\tau_r=h(\theta_r,v_0,\omega_0,0)$。
+消去左右力矩后，先求标量方程 $h_3+r h_1=0$ 的直立附近根，再由 $\tau_L+\tau_R=r h_1$、$\tau_R-\tau_L=2r h_2/d$ 恢复力矩。
+对精确状态方程求完整雅可比，不从小俯仰截断方程构造控制器。
 $\psi_r=\psi_0+\omega_0t$，$x_r,y_r$ 为圆周轨迹；小量是**相对轨迹的误差**，不是世界位置或偏航角自身。
 
 $$\delta\dot Z=A_w(t)\delta Z+B_w\delta\tau.$$
 
-下面 A 的 `psi_ref` 随时间改变；不能把一个时刻的 A 当作整个轨迹的常矩阵。'''),code("sy=symbolic()\nshow('A_w(t)',sy['A']);show('B_w',sy['B'])"),md(r'''## 旋转位置误差得到常系数形式
+下面 A 的 `psi_ref` 随时间改变；不能把一个时刻的 A 当作整个轨迹的常矩阵。'''),code("sy=symbolic()\nprint('参考俯仰角:',result['theta_ref'],'参考力矩:',result['tau_ref'],'残差:',result['trim_residual'])\nshow('0',sy['trim_equation'])\nshow('M_r',sy['M_ref'])\nshow('A_w(t)',sy['A']);show('B_w',sy['B'])"),md(r'''## 旋转位置误差得到常系数形式
 这里沿用 $E$ 表示旋转后的误差（即推导中也常记作 $\eta$ 的向量）；$A_w,B_w$ 分别对应世界误差模型中的 $A,B_Z$。
 
 **1. 定义参考航向坐标中的误差。** 世界误差为 $\delta Z=Z-Z_r$，旋转后的误差为
@@ -194,7 +197,7 @@ $$\dot e_{\parallel}=\omega_0 e_{\perp}+e_v,\qquad
 
 它们不再含绝对参考航向 $\psi_r$。另外，世界输入矩阵的结构为
 
-$$B_w=\begin{bmatrix}0_{4\times2}\\M_0^{-1}B_\tau\end{bmatrix}.$$
+$$B_w=\begin{bmatrix}0_{4\times2}\\M_r^{-1}B_\tau\end{bmatrix}.$$
 
 H 只旋转 B_w 中原本为零的前两行，因此在当前模型中 $B_e=H B_w=B_w$。
 对于此处恒定 $v_0,\omega_0$，其余动力学系数也恒定，因此 $A_e,B_e$ 是常矩阵，可用于求解固定增益 $K_e$。
@@ -203,8 +206,8 @@ $Q$ 的两个位置权重相同，因此这个选择也等价于世界位置误�
         cells += [md(r'''## 状态方程
 $$X=[\delta x,\delta\psi,\delta\theta,\delta\dot x,\delta\dot\psi,\delta\dot\theta]^T,$$
 $$\dot X=AX+B\tau,\quad A=\begin{bmatrix}0&I\\-M_0^{-1}K_0&-M_0^{-1}C_0\end{bmatrix},\quad B=\begin{bmatrix}0\\M_0^{-1}B_0\end{bmatrix}.$$
-下面先展示符号矩阵，再代入当前项目的临时示例参数。数值实现使用 solve，不显式求逆。'''),code("As,Bs=symbolic();show('A',As);show('B',Bs)")]
-    cells += [md(COST),code("from parameters import values\nprint('临时示例参数（不是实车值）：',values()[0])\nfor key in ('A','B','Q','R','P','K'):show(key,s.Matrix(result[key]).evalf(8))\nprint('可控性秩：',result['rank'])\nprint('闭环特征值：',result['poles'])\nprint('CARE残差：',result['care_residual'])"),md(r'''## 最优代价示例
+下面先展示符号矩阵，再代入当前 CAD 参数和用户确认的尺寸。数值实现使用 solve，不显式求逆。'''),code("As,Bs=symbolic();show('A',As);show('B',Bs)")]
+    cells += [md(COST),code("from parameters import values\nprint('CAD 参数（理想模型，未作实车验收）：',values()[0])\nfor key in ('A','B','Q','R','P','K'):show(key,s.Matrix(result[key]).evalf(8))\nprint('可控性秩：',result['rank'])\nprint('闭环特征值：',result['poles'])\nprint('CARE残差：',result['care_residual'])"),md(r'''## 最优代价示例
 只给初始俯仰误差 0.03 rad，其他误差为0；下面得到该线性无限时域问题的最小代价数值。'''),code("E0=np.zeros(len(result['A']));E0[3 if len(E0)==7 else 2]=.03\nshow('J_{min}',s.Float(E0@result['P']@E0))")]
     if turning:cells += [md(r'''## 世界坐标反馈与适用边界
 $$\tau=\tau_r-K_eE=\tau_r-K_w(t)\delta Z,\quad K_w(t)=K_eH(t).$$
@@ -236,7 +239,7 @@ H_ref = error_transform(reference_state[2])
 error_reference = H_ref @ error_world  # 即 E，前两项为前向、左向误差
 K_e = result['K']
 delta_torque = -K_e @ error_reference
-reference_torque = np.zeros(2)  # 当前恒定速度、直立、无耗散参考的 tau_r=0
+reference_torque = result['tau_ref']  # 与相同 v0、w0 的精确参考解一致
 torque = reference_torque + delta_torque  # 顺序为 [tau_L, tau_R]
 ```
 
@@ -247,7 +250,7 @@ torque = reference_torque + delta_torque  # 顺序为 [tau_L, tau_R]
 下面列出参考朝向 0.7 rad 时的世界 A、B、K，验证矩阵不是只支持零偏航。
 若 $v_0=\omega_0=0$，横向位置出现不可控零模态，不能用正定位置代价得到稳定全部七状态的 CARE 解；静止平衡请使用六状态分支。
 一般加减速参考不满足常系数条件，需重新沿可行轨迹线性化并处理时变 Riccati 问题。
-当前 ROS `balance_yaw` 仍使用已验收的六状态里程控制器，本次七状态理论并未自动替换它。'''),code("Aw,Bw,Ae,H=state_matrices(heading=.7)\nshow('A_w(0.7)',s.Matrix(Aw).evalf(8));show('B_w',s.Matrix(Bw).evalf(8))\nshow('K_w(0.7)',s.Matrix(result['K']@H).evalf(8))\nA0,B0,_,_=state_matrices(0,0)\nprint('静止七状态可控性秩：',np.linalg.matrix_rank(np.hstack([np.linalg.matrix_power(A0,i)@B0 for i in range(7)])))")]
+ROS 配置仍保留历史示例参数与六状态控制器；本分支的 CAD 七状态控制器通过数学验证后，也不能直接声称完成 Gazebo 或实车验收。'''),code("Aw,Bw,Ae,H=state_matrices(heading=.7)\nshow('A_w(0.7)',s.Matrix(Aw).evalf(8));show('B_w',s.Matrix(Bw).evalf(8))\nshow('K_w(0.7)',s.Matrix(result['K']@H).evalf(8))\nA0,B0,_,_=state_matrices(0,0)\nprint('静止七状态可控性秩：',np.linalg.matrix_rank(np.hstack([np.linalg.matrix_power(A0,i)@B0 for i in range(7)])))")]
     return cells
 
 def main():

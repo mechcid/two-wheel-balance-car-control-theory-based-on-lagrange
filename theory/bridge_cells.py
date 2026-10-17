@@ -101,17 +101,19 @@ J&=I_{Bzz}+2J_t+\frac{d^2m_W}{2}+\frac{d^2J_s}{2r^2},&
 D&=I_{Bxx}-I_{Bzz}+m_Bl^2.
 \end{aligned}$$
 $m_W,J_s,J_t$ 的定义仍是上文左右相同车轮的质量、自转惯量和径向惯量。
+完整车体惯量新增 $F=I_{Byz}\cos\theta-I_{Bxy}\sin\theta$、$G=-I_{Bxz}\sin(2\theta)$。
 把现有 M6、h6、B6 代入上面的组合并化简 →
 $$M_r=\begin{bmatrix}
 a\sec^2\psi&0&c\cos\theta\sec\psi\\
-0&J+D\sin^2\theta&0\\
-c\cos\theta\sec\psi&0&e
+0&J+D\sin^2\theta+G&F\\
+c\cos\theta\sec\psi&F&e
 \end{bmatrix},$$
-$$h_r=\begin{bmatrix}
+$$h_r^{diag}=\begin{bmatrix}
 a\sec^2\psi\tan\psi\dot x\dot\psi-c\sin\theta\sec\psi(\dot\theta^2+\dot\psi^2)\\
 (2D\sin\theta\cos\theta\dot\theta+c\sin\theta\sec\psi\dot x)\dot\psi\\
 c\cos\theta\sec\psi\tan\psi\dot x\dot\psi-D\sin\theta\cos\theta\dot\psi^2-cg\sin\theta
 \end{bmatrix},$$
+$h_r$ 为上面的 $h_r^{diag}$ 加上 $[0,G^\prime\dot\theta\dot\psi+F^\prime\dot\theta^2,-G^\prime\dot\psi^2/2]^T$。
 $$B_r=\begin{bmatrix}
 \frac1{r\cos\psi}&\frac1{r\cos\psi}\\
 -\frac d{2r}&\frac d{2r}\\-1&-1
@@ -140,9 +142,9 @@ $$\dot N\dot z=\frac{\partial N}{\partial\psi}\delta\dot\psi\,\delta\dot z=O(\ep
 
 **hr第一行：** $\dot x\dot\psi$ 为二阶；$\sin\theta\dot\theta^2$、$\sin\theta\dot\psi^2$ 为三阶，因此一阶没有贡献。
 
-**hr第二行：** 每项至少含 $\theta$ 和两个速度扰动，均至少三阶，没有一阶贡献。
+**hr第二行：** 原对角惯量部分至少三阶；完整惯量新增速度二次项，仍没有一阶贡献。
 
-**hr第三行：** $\cos\theta\dot x\dot\psi$ 为二阶，$\sin\theta\cos\theta\dot\psi^2$ 为三阶；只有重力
+**hr第三行：** $\cos\theta\dot x\dot\psi$ 为二阶，$\sin\theta\cos\theta\dot\psi^2$ 为三阶；完整惯量新增项也至少二阶；只有重力
 $$-cg\sin\theta=-cg\delta\theta+O(\epsilon^3)$$
 保留。因此
 $$h_r=0+C_0\delta\dot z+K_0\delta z+O(\epsilon^2),\quad
@@ -158,7 +160,7 @@ $$M_0=M_r(z_0),\quad C_0=(\partial_{\dot z}h_r)_0,\quad
 K_0=(\partial_z h_r)_0,\quad B_0=B_r(z_0).$$
 对上面精确转向分支的现有参数假设，实际矩阵是
 $$M_0=\begin{bmatrix}
-a\sec^2\psi_0&0&c\sec\psi_0\\0&J&0\\c\sec\psi_0&0&e
+a\sec^2\psi_0&0&c\sec\psi_0\\0&J&I_{Byz}\\c\sec\psi_0&I_{Byz}&e
 \end{bmatrix},\quad C_0=0_{3\times3},\quad
 K_0=\begin{bmatrix}0&0&0\\0&0&0\\0&0&-m_Bgl\end{bmatrix},$$
 $$B_0=\begin{bmatrix}\frac1{r\cos\psi_0}&\frac1{r\cos\psi_0}\\-\frac d{2r}&\frac d{2r}\\-1&-1\end{bmatrix}.$$
@@ -173,8 +175,8 @@ $$M_0=\begin{bmatrix}
 \frac{d[(I_{Ryy}-I_{Lyy})/r^2+m_R-m_L]}{2\cos\psi_0}&
 \frac{lm_B}{\cos\psi_0}\\
 \frac{d[(I_{Ryy}-I_{Lyy})/r^2+m_R-m_L]}{2\cos\psi_0}&
-I_{Bzz}+I_{Lzz}+I_{Rzz}+\frac{d^2}{4}\left[m_L+m_R+\frac{I_{Lyy}+I_{Ryy}}{r^2}\right]&0\\
-\frac{lm_B}{\cos\psi_0}&0&I_{Byy}+m_Bl^2
+I_{Bzz}+I_{Lzz}+I_{Rzz}+\frac{d^2}{4}\left[m_L+m_R+\frac{I_{Lyy}+I_{Ryy}}{r^2}\right]&I_{Byz}\\
+\frac{lm_B}{\cos\psi_0}&I_{Byz}&I_{Byy}+m_Bl^2
 \end{bmatrix}.$$
 C0、K0、B0与第8节同形。将左右相同轴对称参数代入此式 → 中间的质量耦合项为0 → 严格回到第8节。
 因此，“先投影再静止线性化”与本项目静止分支“先做一致的局部能量/约束近似再投影”在共同假设下对得上。

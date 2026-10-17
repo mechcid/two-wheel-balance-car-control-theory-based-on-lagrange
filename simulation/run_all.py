@@ -5,7 +5,7 @@ from common import serial
 
 def write_report(results,target):
     lines=['# 数学仿真运行结果','',
-           '参数为临时示例；累计前向行程 s，质心距离 l。下表是实际运行值，不是 Gazebo/实车结果。','',
+           '参数来自 CAD 与用户尺寸；累计前向行程 s，质心距离 l。下表是实际运行值，不是 Gazebo/实车结果。','',
            '| 分支/场景 | 末端俯仰误差 rad | 末端位置误差 m | 电机峰值 N m | 限幅采样比例 |',
            '|---|---:|---:|---:|---:|']
     for branch,cases in results.items():

@@ -12,13 +12,13 @@ import matplotlib.pyplot as plt
 DT=.02
 TORQUE_LIMIT=1.0  # 每个电机 N m；控制律的原始输出和限幅输出都记录。
 
-def integrate(rhs,z0,duration,stops=(),event=None):
+def integrate(rhs,z0,duration,stops=(),event=None,jac=None):
     """在外部扰动起止时刻分段，防止积分器跨过短脉冲。"""
     times=np.linspace(0,duration,round(duration/DT)+1);chunks=[];current=np.asarray(z0,float)
     for a,b in zip([0,*stops],[*stops,duration]):
         ts=times[(times>=a-1e-10)&(times<=b+1e-10)]
         ts=np.unique(np.r_[a,ts,b]);ts=np.clip(ts,a,b)
-        sol=solve_ivp(rhs,(a,b),current,t_eval=ts,events=event,rtol=1e-9,atol=1e-11,max_step=DT)
+        sol=solve_ivp(rhs,(a,b),current,t_eval=ts,events=event,rtol=1e-9,atol=1e-11,max_step=DT,method='Radau',jac=jac)
         if not sol.success:raise RuntimeError(sol.message)
         chunk=np.column_stack((sol.t,sol.y.T))
         chunks.append(chunk if not chunks else chunk[1:]);current=sol.y[:,-1]
@@ -40,7 +40,7 @@ def save_case(out,name,t,z,ref,errors,raw,applied,disturbance,labels,design,extr
           'tail_max_errors':np.max(abs(errors[t>=t[-1]-min(2,t[-1])]),axis=0).tolist(),
           'peak_motor_torque_Nm':peak.tolist(),'saturation_fraction':float(np.mean(abs(raw)>TORQUE_LIMIT)),
           'rank':design['rank'],'closed_poles':[[x.real,x.imag] for x in design['poles']],
-          'notice':'临时示例参数；数学模型仿真，不是 Gazebo 或实车验收。'}
+          'notice':'CAD 参数与用户尺寸；数学模型仿真，不是 Gazebo 或实车验收。'}
     if extra:info.update(extra)
     head=['t']+labels+[v+'_ref' for v in labels]+['error_'+v for v in labels]+['tau_L_raw','tau_R_raw','tau_L','tau_R','dist_L','dist_R']
     np.savetxt(out/'trajectory.csv',np.column_stack([t,z,ref,errors,raw,applied,disturbance]),delimiter=',',header=','.join(head),comments='')

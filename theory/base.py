@@ -14,8 +14,13 @@ m_L,m_R,m_B=s.symbols('m_L m_R m_B', positive=True)
 I_Lxx,I_Lyy,I_Lzz,I_Rxx,I_Ryy,I_Rzz,I_Bxx,I_Byy,I_Bzz=s.symbols(
     'I_Lxx I_Lyy I_Lzz I_Rxx I_Ryy I_Rzz I_Bxx I_Byy I_Bzz', positive=True)
 
+# 实际惯量矩阵的非对角元素（CAD 正惯性积须先取反）。
+I_Bxy,I_Bxz,I_Byz=s.symbols("I_Bxy I_Bxz I_Byz", real=True)
+
 def clean(a):
-    return a.applyfunc(s.trigsimp) if isinstance(a,s.MatrixBase) else s.trigsimp(a)
+    # 先展开，再用 Fu 三角恒等变换，避免默认匹配化简对完整惯量大式做高维因式分解。
+    def scalar(e): return s.trigsimp(s.expand(e),method='fu')
+    return a.applyfunc(scalar) if isinstance(a,s.MatrixBase) else scalar(a)
 def ry(a): return s.Matrix([[s.cos(a),0,s.sin(a)],[0,1,0],[-s.sin(a),0,s.cos(a)]])
 def rz(a): return s.Matrix([[s.cos(a),-s.sin(a),0],[s.sin(a),s.cos(a),0],[0,0,1]])
 def homogeneous(R,p): return R.row_join(p).col_join(s.Matrix([[0,0,0,1]]))
@@ -50,7 +55,7 @@ def kinematics():
 def energies():
     """逐刚体用 N 系 v、omega 计算；惯量也先转到 N 系。"""
     k=kinematics(); parts={}
-    bodies={'B':(m_B,s.diag(I_Bxx,I_Byy,I_Bzz)),
+    bodies={'B':(m_B,s.Matrix([[I_Bxx,I_Bxy,I_Bxz],[I_Bxy,I_Byy,I_Byz],[I_Bxz,I_Byz,I_Bzz]])),
             'WL':(m_L,s.diag(I_Lxx,I_Lyy,I_Lzz)),
             'WR':(m_R,s.diag(I_Rxx,I_Ryy,I_Rzz))}
     for name,(mass,Ib) in bodies.items():

@@ -1,3 +1,5 @@
+> 当前 `dissymmetry_motor` 分支使用完整车体惯量、CAD 实车参数和高度质心近似；原 `master` 分支保留无惯性积模型。新理论与数学仿真见 [theory/README.md](theory/README.md)。ROS/Gazebo 历史示例配置尚未切换到新参数或新增益。
+
 # 平衡车：局部线性模型与 LQR 数值验证
 
 首次接触数值仿真，请先读 [仿真代码与图表说明](simulation/GUIDE.md)。
