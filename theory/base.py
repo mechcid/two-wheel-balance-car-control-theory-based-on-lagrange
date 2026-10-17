@@ -1,5 +1,5 @@
 """唯一的三刚体运动学源。R_parent_child 把 child 分量变成 parent 分量。
-N 原点位于名义车轴高度平面；地面 z=-r。l_c 是质心高度，非行程 l。
+N 原点位于名义车轴高度平面；地面 z=-r。l 是质心高度，行程使用 s。
 所有 q/qd 都是独立符号，时间微分用 Jacobian 链式法则显式实现。
 """
 from functools import lru_cache
@@ -9,7 +9,7 @@ x,y,psi,theta,theta_L,theta_R=q
 # dx 等是内部广义速度符号；笔记本通过 symbol_names 显示为对应坐标的上点形式。
 qd=s.Matrix(s.symbols('dx dy dpsi dtheta dtheta_L dtheta_R', real=True))
 qdd=s.Matrix(s.symbols('ddx ddy ddpsi ddtheta ddtheta_L ddtheta_R', real=True))
-r,d,lc,g=s.symbols('r d l_c g', positive=True)
+r,d,l,g=s.symbols('r d l g', positive=True)
 m_L,m_R,m_B=s.symbols('m_L m_R m_B', positive=True)
 I_Lxx,I_Lyy,I_Lzz,I_Rxx,I_Ryy,I_Rzz,I_Bxx,I_Byy,I_Bzz=s.symbols(
     'I_Lxx I_Lyy I_Lzz I_Rxx I_Ryy I_Rzz I_Bxx I_Byy I_Bzz', positive=True)
@@ -30,7 +30,7 @@ def dt(a):
 def kinematics():
     Rnc=rz(psi)
     edges={('N','C'):(Rnc,s.Matrix([x,y,0])),
-           ('C','B'):(ry(theta),ry(theta)*s.Matrix([0,0,lc])),
+           ('C','B'):(ry(theta),ry(theta)*s.Matrix([0,0,l])),
            ('C','WL'):(ry(theta_L),s.Matrix([0,d/2,0])),
            ('C','WR'):(ry(theta_R),s.Matrix([0,-d/2,0]))}
     adjacent={f'{a}_{b}':homogeneous(R,p) for (a,b),(R,p) in edges.items()}

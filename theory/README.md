@@ -72,7 +72,7 @@ PYTHONPATH=theory .venv/bin/python -m turning_balance.lqr
 
 关系树是 `N → C → B / WL / WR`。`R_parent_child` 将子坐标分量变成父坐标分量；齐次矩阵的平移列在父系中表达。相邻的变换、角速度反对称矩阵以及各刚体在 N 系下的速度，均在 `base.ipynb` 展开。
 
-保留用户现有代码的原点约定：N 的原点位于名义车轴高度平面，车轴中点 `Co=[x,y,0]`，地面为 `z=-r`。不是把车轴放到地面。`Lo-Co=+d/2 C.y`，`Ro-Co=-d/2 C.y`，`Bo-Co=l_c B.z`。Gazebo 中模型相对于地面的生成高度是另一回事。
+保留用户现有代码的原点约定：N 的原点位于名义车轴高度平面，车轴中点 `Co=[x,y,0]`，地面为 `z=-r`。不是把车轴放到地面。`Lo-Co=+d/2 C.y`，`Ro-Co=-d/2 C.y`，`Bo-Co=l B.z`。Gazebo 中模型相对于地面的生成高度是另一回事。
 
 | 符号 | 当前含义 |
 |---|---|
@@ -80,8 +80,8 @@ PYTHONPATH=theory .venv/bin/python -m turning_balance.lqr
 | `psi` | C 相对 N 的偏航；正向绕 N.z |
 | `theta` | B 相对 C 的俯仰；正向绕 C.y |
 | `theta_L,theta_R` | 两轮相对 C 的转角；正向绕 C.y |
-| `l_c` / Python `lc` | 车体质心到车轴的距离；旧参数文件仍叫 `l`，在参数接口明确映射 |
-| 行程 `l` | 先前转向分支的累计前向行程，`dl/dt=v`；不是 N 系的 x |
+| `l` / Python `l` | 车体质心到车轴的距离；旧参数文件仍叫 `l`，在参数接口明确映射 |
+| 行程 `s` | 累计前向行程，`ds/dt=v`；不是 N 系的 x，旧版行程 l 改为 s |
 | `v` | 前向速度，`xdot=v cos(psi)`、`ydot=v sin(psi)` |
 | `omega,p` | 偏航角速度、俯仰角速度 |
 
@@ -145,11 +145,11 @@ Q/R 是可修改函数参数，默认沿用原六状态的俯仰优先配置；�
 
 `parameters.py` 读取 `../simulation/lqr_simulation.py` 的 `PARAMS/CONFIG`，额外从 `../ros2_ws/src/balance_sim/config/physical.yaml` 读取已有 `I_Bxx`。不另建一套车辆参数。
 
-当前全部为临时示例：r=.1 m，d=.4 m，l_c=.3 m；mB=2 kg，mL=mR=.5 kg；轮自转惯量=.0025、径向惯量=.00125 kg·m²；车体 Ixx=.10、Iyy=.08、Izz=.06 kg·m²，g=9.81。
+当前全部为临时示例：r=.1 m，d=.4 m，l=.3 m；mB=2 kg，mL=mR=.5 kg；轮自转惯量=.0025、径向惯量=.00125 kg·m²；车体 Ixx=.10、Iyy=.08、Izz=.06 kg·m²，g=9.81。
 
 原有数值仿真函数与 ROS 仿真控制器保持。仅将 `simulation/check_matrix_source.py` 和 `simulation/yaw_motion/check_projection.py` 的理论读取入口更新到新模块；`simulation/check_lagrange.py` 转到新的完整校验。
 
-**现有 ROS `balance_yaw` 仍是已验收的六状态行程控制器 `[l,psi,theta,v,omega,p]`。本次七状态位置轨迹 LQR 属于理论重构成果，未自动替换 ROS 节点，也没有据此声称 Gazebo 七状态验收通过。**
+**现有 ROS `balance_yaw` 仍是已验收的六状态行程控制器 `[s,psi,theta,v,omega,p]`（历史 ROS 日志的该列仍命名为 l）。本次七状态位置轨迹 LQR 属于理论重构成果，未自动替换 ROS 节点，也没有据此声称 Gazebo 七状态验收通过。**
 
 ## 8. 本次实际校验
 
@@ -167,3 +167,17 @@ Q/R 是可修改函数参数，默认沿用原六状态的俯仰优先配置；�
 ## 9. 凯恩历史文件
 
 `kane/` 保留原 `archive_kane/` 中的实验代码与旧输出，不参与五本笔记本的一键更新。它们不是当前推导的第二条来源，更不是当前验收依据。特别是旧输出中关于 `Q_x=0` 的结论不作为有效结论沿用；当前输入始终从虚功投影得到。完整历史说明仍可在重构前备份查阅。
+
+
+## 六维到三维的推导流程
+
+```mermaid
+flowchart LR
+  A["6维约束动力学"] --> B["q̇ = N ż"]
+  B --> C["Nᵀ投影消去 λ"]
+  C --> D["3维非线性动力学"]
+  D --> E["静止点一阶线性化"]
+  E --> F["M₀ δz̈ + C₀ δż + K₀ δz = B₀ τ"]
+```
+
+两本 `lagrange.ipynb` 的“补全：六维约束方程怎样得到三维局部方程”逐项展开 N、Ṅ、速度与加速度、Mr/hr/Br及其参考点雅可比。静止分支原矩阵已冻结，不伪装成非线性原式：补全章节复用现有转向精确矩阵展示完整链条，再与静止分支含左右不等参数的结果对账。`reduction_bridge.py` 直接读取现成矩阵做投影和符号校验；`bridge_cells.py` 保存这段可重建的文档内容。

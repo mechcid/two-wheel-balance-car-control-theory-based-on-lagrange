@@ -65,7 +65,7 @@ def make_base():
 $R_{PC}$ 把子系 C 的分量变换到父系 P；$T_{PC}$ 的平移列也在父系中表示。
 $N$ 原点位于名义车轴高度平面，故 $p_C^N=[x,y,0]^T$，地面高度为 $-r$。
 $No,Co,Bo,Lo,Ro$ 分别是 N,C,B,WL,WR 的原点。左轮沿 $+C.y$、右轮沿 $-C.y$。
-$l_c$ 是质心距车轴的高度；不再与历史前向行程 $l$ 共用符号。
+$l$ 是质心距车轴的高度；累计前向行程统一记为 $s$。
 本文件不做小角度近似。修改 `base.py` 后统一重建所有笔记本。'''),code(SETUP),code('from base import *\nk=kinematics()\nshow("q",q)\nshow(r"\\dot q",qd)'),md('## 相邻坐标系位姿和角速度矩阵\n角速度矩阵 $[\\omega_{child/parent}^{parent}]_\\times=\\dot R R^T$，各项仍是精确三角函数。'),code("for name,T in k['adjacent'].items():\n    show('T_{'+name+'}',T)\n    show(r'[\\omega_{'+name+r'}]_{\\times}',k['relative_omega_hat'][name])"),md(r'''## 各刚体在 N 系的位置、速度和角速度
 $$T_{NB}=T_{NC}T_{CB},\quad T_{NWL}=T_{NC}T_{CWL},\quad T_{NWR}=T_{NC}T_{CWR}.$$
 $$v_i^N=\frac{\partial p_i^N}{\partial q}\dot q,
@@ -81,7 +81,7 @@ def make_lagrange(turning):
 $\psi$ 与偏航速度不作小量；只把 $\theta,p=\dot\theta$ 作为俯仰小扰动。
 本分支车轮轴对称且左右相同，$m_W=m_L=m_R$，$J_s=I_{Lyy}=I_{Ryy}$，$J_t=I_{Lxx}=I_{Lzz}=I_{Rxx}=I_{Rzz}$。
 先由共用速度构造精确能量并求导，再展开小俯仰方程，避免丢失 $\theta\omega^2$。
-可允许速度为 $u=[v,\omega,p]^T$，$v=\dot l$；$l$ 是历史版本的累计前向行程。
+可允许速度为 $u=[v,\omega,p]^T$，$v=\dot s$；$s$ 是累计前向行程（旧版写作 $l$，现已改名）。
 $x,y$ 保持世界位置，$\dot x=v\cos\psi,\dot y=v\sin\psi$，不把 $v$ 冒充世界 $\dot x$。
 ''' if turning else r'''# 固定名义朝向：第一类与无乘子第二类拉格朗日方程
 名义速度均为零，$\psi=\psi_0+\delta\psi$，$\theta=\delta\theta$。
@@ -123,6 +123,9 @@ $h_{small}$ 含速度乘积，系统仍是非线性的，不能给任意转向�
     else:cells += [md(r'''## 最终局部矩阵
 $$M_0\delta\ddot z+C_0\delta\dot z+K_0\delta z=B_0\tau,\quad z=[x,\psi,\theta]^T.$$
 一阶局部模型的约束也冻结在同一静止参考点；不把局部能量模型假装成完整非线性模型。'''),code("for key,label in [('M','M_0'),('C','C_0'),('K','K_0'),('B','B_0')]:show(label,m[key])")]
+    from bridge_cells import cells as reduction_cells
+    insert_at = next(i for i, cell in enumerate(cells) if cell.cell_type == "markdown" and cell.source.startswith("## 第二类"))
+    cells[insert_at:insert_at] = reduction_cells(turning)
     return cells
 
 def make_lqr(turning):
@@ -138,10 +141,63 @@ $\psi_r=\psi_0+\omega_0t$，$x_r,y_r$ 为圆周轨迹；小量是**相对轨迹�
 $$\delta\dot Z=A_w(t)\delta Z+B_w\delta\tau.$$
 
 下面 A 的 `psi_ref` 随时间改变；不能把一个时刻的 A 当作整个轨迹的常矩阵。'''),code("sy=symbolic()\nshow('A_w(t)',sy['A']);show('B_w',sy['B'])"),md(r'''## 旋转位置误差得到常系数形式
-$$E=H(t)\delta Z=[e_{\parallel},e_{\perp},e_\psi,e_\theta,e_v,e_\omega,e_p]^T.$$
+这里沿用 $E$ 表示旋转后的误差（即推导中也常记作 $\eta$ 的向量）；$A_w,B_w$ 分别对应世界误差模型中的 $A,B_Z$。
+
+**1. 定义参考航向坐标中的误差。** 世界误差为 $\delta Z=Z-Z_r$，旋转后的误差为
+
+$$E=H(t)\delta Z=[e_{\parallel},e_{\perp},e_\psi,e_\theta,e_v,e_\omega,e_p]^T,$$
+
+$$H(t)=\begin{bmatrix}C(\psi_r(t))&0_{2\times5}\\0_{5\times2}&I_5\end{bmatrix},\qquad
+C(\psi_r)=\begin{bmatrix}\cos\psi_r&\sin\psi_r\\-\sin\psi_r&\cos\psi_r\end{bmatrix}.$$
+
+因此前两项是位置误差在参考车头方向、参考左侧方向上的投影：
+
+$$e_{\parallel}=\cos\psi_r\,\delta x+\sin\psi_r\,\delta y,$$
+$$e_{\perp}=-\sin\psi_r\,\delta x+\cos\psi_r\,\delta y.$$
+
 H 只旋转前两项，不旋转角度和速度误差。
-$$A_e=H A_w H^{-1}+\dot H H^{-1},\quad B_e=H B_w.$$
-对于此处恒定 $v_0,\omega_0$，$A_e,B_e$ 是常矩阵。$\dot H$ 不能省略。
+
+**2. 对随时间变化的坐标变换求导。** 参考航向随时间变化，故 $H$ 不是常矩阵。使用乘积法则：
+
+$$\dot E=\frac{d}{dt}(H\delta Z)=\dot H\delta Z+H\delta\dot Z.$$
+
+代入世界坐标中的线性误差方程 $\delta\dot Z=A_w(t)\delta Z+B_w\delta\tau$，得到
+
+$$\dot E=\dot H\delta Z+H A_w\delta Z+H B_w\delta\tau.$$
+
+**3. 将右侧也改用 E 表示。** $C$ 是旋转矩阵，故 $H$ 是正交矩阵：
+
+$$H H^T=H^T H=I_7,\qquad H^{-1}=H^T,\qquad \delta Z=H^T E.$$
+
+将此关系代回上一式，并合并乘以 E 的两项：
+
+$$\begin{aligned}
+\dot E&=\dot H H^T E+H A_w H^T E+H B_w\delta\tau\\
+&=(H A_w H^T+\dot H H^T)E+H B_w\delta\tau.
+\end{aligned}$$
+
+与目标形式 $\dot E=A_e E+B_e\delta\tau$ 对照，得到
+
+$$\boxed{A_e=H A_w H^T+\dot H H^T,\qquad B_e=H B_w.}$$
+
+其中 $H A_w H^T$ 是原误差动力学的坐标变换，$\dot H H^T$ 是误差坐标系自身转动带来的附加项；后者不能省略。
+
+**4. 展开坐标系转动的附加项。** 此处 $\dot\psi_r=\omega_0$，所以
+
+$$\dot C=\omega_0\begin{bmatrix}-\sin\psi_r&\cos\psi_r\\-\cos\psi_r&-\sin\psi_r\end{bmatrix},\qquad
+\dot C C^T=\begin{bmatrix}0&\omega_0\\-\omega_0&0\end{bmatrix}.$$
+
+$\dot H H^T$ 只有左上角的这个 $2\times2$ 块非零。结合 $H A_w H^T$，位置误差的前两行变为
+
+$$\dot e_{\parallel}=\omega_0 e_{\perp}+e_v,\qquad
+\dot e_{\perp}=-\omega_0 e_{\parallel}+v_0 e_\psi.$$
+
+它们不再含绝对参考航向 $\psi_r$。另外，世界输入矩阵的结构为
+
+$$B_w=\begin{bmatrix}0_{4\times2}\\M_0^{-1}B_\tau\end{bmatrix}.$$
+
+H 只旋转 B_w 中原本为零的前两行，因此在当前模型中 $B_e=H B_w=B_w$。
+对于此处恒定 $v_0,\omega_0$，其余动力学系数也恒定，因此 $A_e,B_e$ 是常矩阵，可用于求解固定增益 $K_e$。
 $Q$ 的两个位置权重相同，因此这个选择也等价于世界位置误差的各向同性惩罚。'''),code("show('H',sy['H']);show('A_e',sy['Ae']);show('B_e',sy['Be'])")]
     else:
         cells += [md(r'''## 状态方程
@@ -153,6 +209,41 @@ $$\dot X=AX+B\tau,\quad A=\begin{bmatrix}0&I\\-M_0^{-1}K_0&-M_0^{-1}C_0\end{bmat
     if turning:cells += [md(r'''## 世界坐标反馈与适用边界
 $$\tau=\tau_r-K_eE=\tau_r-K_w(t)\delta Z,\quad K_w(t)=K_eH(t).$$
 K_e 是上面的 2×7 常矩阵，每一行对应一侧电机、每列对应一种误差。
+
+### 实现时必须区分两种误差向量
+
+**固定增益 $K_e$ 对应旋转后的误差 E，不可直接乘世界坐标误差 $Z-Z_r$。** 两者的状态排列为：
+
+$$\delta Z=[x-x_r,y-y_r,\delta\psi,\delta\theta,\delta v,\delta\omega,\delta p]^T,$$
+$$E=[e_{\parallel},e_{\perp},\delta\psi,\delta\theta,\delta v,\delta\omega,\delta p]^T=H(\psi_r)\delta Z.$$
+
+前两项分别为**参考车辆的前向位置误差、参考车辆左侧的横向位置误差**：
+
+$$e_{\parallel}=\cos\psi_r(x-x_r)+\sin\psi_r(y-y_r),$$
+$$e_{\perp}=-\sin\psi_r(x-x_r)+\cos\psi_r(y-y_r).$$
+
+它们不是世界坐标中的 $\delta x,\delta y$。前向沿参考车头方向；参考前进速度为正时，它也是轨迹切向，横向则是法向。变换必须使用**参考航向 $\psi_r$**，与本笔记本的模型和增益保持一致；其余五项不做坐标旋转，排列也不能改变。
+
+每个控制周期按以下流程计算（代码示意，`state` 来自实际状态估计，`t` 与参考轨迹使用同一时间起点）：
+
+```python
+reference_state = reference(t, v0=result['v0'], w0=result['w0'])
+error_world = np.asarray(state, dtype=float) - reference_state
+# 把实际航向与参考航向之差映射到 [-pi, pi)，避免跨越 2*pi 的跳变。
+error_world[2] = (error_world[2] + np.pi) % (2 * np.pi) - np.pi
+
+H_ref = error_transform(reference_state[2])
+error_reference = H_ref @ error_world  # 即 E，前两项为前向、左向误差
+K_e = result['K']
+delta_torque = -K_e @ error_reference
+reference_torque = np.zeros(2)  # 当前恒定速度、直立、无耗散参考的 tau_r=0
+torque = reference_torque + delta_torque  # 顺序为 [tau_L, tau_R]
+```
+
+此处的 $\dot E=A_eE+B_e\delta\tau$ 描述 E 的变化率；反馈使用的是 **E 本身**。等价实现是先计算 $K_w(t)=K_eH(\psi_r)$，再用 $\tau=\tau_r-K_w(t)\delta Z$；不能省略 H，也不能把已经旋转过的 E 再旋转一次。
+
+### 参考朝向示例与适用边界
+
 下面列出参考朝向 0.7 rad 时的世界 A、B、K，验证矩阵不是只支持零偏航。
 若 $v_0=\omega_0=0$，横向位置出现不可控零模态，不能用正定位置代价得到稳定全部七状态的 CARE 解；静止平衡请使用六状态分支。
 一般加减速参考不满足常系数条件，需重新沿可行轨迹线性化并处理时变 Riccati 问题。

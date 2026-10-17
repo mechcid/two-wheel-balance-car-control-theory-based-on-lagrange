@@ -22,7 +22,7 @@ def values():
 
 def substitutions():
     p,_=values()
-    return {getattr(b,'lc' if k=='l' else k):v for k,v in p.items() if k!='psi0'}
+    return {getattr(b,'l' if k=='l' else k):v for k,v in p.items() if k!='psi0'}
 
 def numeric(matrix,subs): return np.array(matrix.subs(subs),dtype=float)
 

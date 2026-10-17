@@ -11,7 +11,7 @@ sys.path.insert(0,str(root/'theory'))
 from turning_balance import lagrange as theory
 model=theory.build()
 ns={**model,'q':theory.q,'qd':theory.qd,
-    'r':theory.r,'d':theory.d,'lc':theory.lc,'g':theory.g,
+    'r':theory.r,'d':theory.d,'lc':theory.l,'g':theory.g,
     'mB':theory.m_B,'mW':theory.mW,'Js':theory.Js,'Jt':theory.Jt,
     'Ix':theory.I_Bxx,'Iy':theory.I_Byy,'Iz':theory.I_Bzz}
 p=yaml.safe_load((root/'ros2_ws/src/balance_sim/config/physical.yaml').read_text());p['com_height']=p['l']

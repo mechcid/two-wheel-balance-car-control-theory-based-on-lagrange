@@ -6,7 +6,6 @@ import sympy as s
 from base import *
 from lagrange_utils import derive
 psi_0=s.Symbol('psi_0',real=True)
-l=lc  # 仅兼容旧 Parameters.l；新文档统一写 l_c 为质心高度。
 
 @lru_cache(None)
 def build():
@@ -14,7 +13,7 @@ def build():
     rest={psi:psi_0,theta:0,theta_L:0,theta_R:0}
     M_at_rest=clean(s.hessian(T_exact,qd).subs(rest))
     T2=clean((qd.T*M_at_rest*qd)[0]/2)
-    V2=m_B*g*lc*(1-theta**2/2)
+    V2=m_B*g*l*(1-theta**2/2)
     # 局部一阶模型应使用在同一参考点冻结的约束；非线性约束仍在 base 可查。
     A0=constraints()[1].subs(rest)
     c=s.cos(psi_0)
@@ -22,7 +21,7 @@ def build():
                 [1/(r*c),-d/(2*r),0],[1/(r*c),d/(2*r),0]])
     u=s.Matrix(s.symbols('u_x u_psi u_theta',real=True))
     model=derive(T2,V2,A0,S,u)
-    stiffness=s.diag(0,0,-m_B*g*lc)
+    stiffness=s.diag(0,0,-m_B*g*l)
     assert clean(model['h']-stiffness*s.Matrix([x,psi,theta]))==s.zeros(3,1)
     model.update(T_exact=T_exact,V_exact=V_exact,C=s.zeros(3),K=stiffness,
                  z=s.Matrix([x,psi,theta]))

@@ -20,9 +20,9 @@ def build():
     eps=s.Symbol('epsilon')
     def first(e):return s.expand(e.subs({theta:eps*theta,p:eps*p},simultaneous=True)).series(eps,0,2).removeO().subs(eps,1)
     Msmall=model['M'].applyfunc(first); hsmall=model['h'].applyfunc(first)
-    a=m_B+2*mW+2*Js/r**2; c=m_B*lc; e=I_Byy+m_B*lc**2
+    a=m_B+2*mW+2*Js/r**2; c=m_B*l; e=I_Byy+m_B*l**2
     J=I_Bzz+2*Jt+d**2*mW/2+d**2*Js/(2*r**2)
-    D=I_Bxx-I_Bzz+m_B*lc**2
+    D=I_Bxx-I_Bzz+m_B*l**2
     expected=s.Matrix([[a,0,c*s.cos(theta)],[0,J+D*s.sin(theta)**2,0],[c*s.cos(theta),0,e]])
     assert clean(model['M']-expected)==s.zeros(3)
     expected_h=s.Matrix([-c*s.sin(theta)*(p**2+omega**2),

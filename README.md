@@ -2,6 +2,16 @@
 
 首次接触数值仿真，请先读 [仿真代码与图表说明](simulation/GUIDE.md)。
 
+## 当前数学仿真入口
+
+阅读 [分场景仿真说明](simulation/README.md)，运行：
+
+```bash
+.venv/bin/python simulation/run_all.py
+```
+
+`simulation/straight_balance/` 验证局部平衡和前进/后退位置调节；`simulation/turning_balance/` 验证七状态转向跟踪并对比近似/精确模型。新输出位于各分支的 outputs 中。下文旧单文件程序和输出仍保留作回归基准。
+
 ## 文件结构
 
 - `theory/README.md`：理论结构、坐标约定、两个场景及阅读顺序。
@@ -73,6 +83,6 @@ Q=diag(10,5,400,5,2,40)，R=diag(10,10)，u=-K_LQR*X。
 
 ## 持续偏航运动独立分支
 
-新增 [两个场景的理论推导](theory/README.md) 和 [balance_yaw 启动/物理验收](ros2_ws/YAW_MOTION.md)。运动坐标l为累计前向行程，质心高度改记l_c/com_height；旧静止分支保持。
+新增 [两个场景的理论推导](theory/README.md) 和 [balance_yaw 启动/物理验收](ros2_ws/YAW_MOTION.md)。当前数学符号：s 为累计前向行程，l 为车轴到质心距离；历史ROS字段名保留兼容。
 
 理论转向分支现新增七状态 `[x,y,psi,theta,v,omega,p]` 跟踪模型；现有 ROS `balance_yaw` 的六状态里程控制器保留，尚未替换为七状态版本。
