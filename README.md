@@ -47,7 +47,14 @@
 
 ## 快捷计算 K
 
-以下命令均在项目根目录执行，使用项目本地的 `.venv` 环境。新环境需要先准备 Python 3.11 或更高版本，以及 NumPy、SciPy、SymPy；绘图和 Notebook 还需要相应依赖。`.venv` 是本地环境，不随仓库分发；`simulation/requirements.txt` 仅列出了部分数值与绘图依赖，并非完整环境清单。
+以下命令均在项目根目录执行，使用项目本地的 `.venv` 环境。首次使用请准备 Python 3.12 或更高版本，再创建环境并安装依赖：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirement.txt
+```
+
+[`requirement.txt`](requirement.txt) 记录了当前项目使用的 Python 直接依赖及版本，覆盖理论计算、数学仿真和 Notebook。`.venv` 是本地环境，不随仓库分发；`simulation/requirements.txt` 转向同一份清单。ROS 2 / Gazebo 及相关系统依赖需另按 [ROS 工程说明](ros2_ws/README.md) 配置。
 
 先修改带中文注释的 [`config/lqr.toml`](config/lqr.toml)，再运行：
 

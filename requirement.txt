@@ -1,0 +1,23 @@
+# Python 3.12+；以下版本来自当前项目环境（2026-10-23）。
+# 安装：.venv/bin/python -m pip install -r requirement.txt
+# 记录项目直接依赖；它们的间接依赖由 pip 自动安装。
+
+# 数值计算、连续/离散 LQR、符号动力学与绘图
+numpy==2.5.2
+scipy==1.18.1
+sympy==1.14.0
+matplotlib==3.11.1
+
+# 阅读、生成和执行理论 Notebook
+jupyterlab==4.6.3
+ipykernel==7.3.0
+ipython==9.17.1
+nbformat==5.11.1
+nbclient==0.11.0
+
+# 历史仿真配置读取及 ROS 辅助工具
+PyYAML==6.0.3
+pillow==12.3.0
+
+# ROS 2、Gazebo、rclpy、消息包、xacro 和 tkinter 属于系统环境依赖，
+# 不通过本文件安装；请按 ros2_ws/README.md 配置。
