@@ -1,4 +1,7 @@
-/.venv
+# 本地 Python 虚拟环境，不提交到仓库
+/.venv/
+/venv/
+/env/
 /.claude
 # Python runtime caches
 __pycache__/
