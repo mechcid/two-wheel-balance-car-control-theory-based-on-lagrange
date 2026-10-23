@@ -1,6 +1,6 @@
 # 数学仿真：固定朝向平衡与持续偏航跟踪
 
-当前入口是 `run_all.py`。程序直接调用 `theory/straight_balance` 和 `theory/turning_balance` 的推导及 LQR，不从 ROS 节点复制一套动力学，不启动 ROS/Gazebo，也不写入 ROS 配置。
+当前入口是 `run_all.py`。程序直接调用 `theory/origin_static_balance` 和 `theory/turning_balance` 的推导及 LQR，不从 ROS 节点复制一套动力学，不启动 ROS/Gazebo，也不写入 ROS 配置。
 
 ## 符号约定
 
@@ -17,7 +17,7 @@
 simulation/
   run_all.py                  统一入口，可选场景
   common.py                   solve_ivp、限幅常量、CSV/JSON和图表导出
-  straight_balance/
+  origin_static_balance/
     run.py                    开环、平衡、前进/后退位置调节
     outputs/<case>/           每个实验自己的结果
   turning_balance/
@@ -41,18 +41,18 @@ simulation/
 
 ```bash
 .venv/bin/python simulation/run_all.py
-.venv/bin/python simulation/run_all.py --scenario straight
+.venv/bin/python simulation/run_all.py --scenario origin_static_balance
 .venv/bin/python simulation/run_all.py --scenario turning
 ```
 
 两个场景也可分别直接运行：
 
 ```bash
-.venv/bin/python simulation/straight_balance/run.py
+.venv/bin/python simulation/origin_static_balance/run.py
 .venv/bin/python simulation/turning_balance/run.py
 ```
 
-全部运行写 `simulation/results.json` 和 `results.md`；选单个分支写 `straight_results.json` 或 `turning_results.json`，不冒充全套结果。
+全部运行写 `simulation/results.json` 和 `results.md`；选单个分支写 `origin_static_balance_results.json` 或 `turning_results.json`，不冒充全套结果。
 
 ## 从代码到一次实验
 
@@ -64,7 +64,7 @@ simulation/
 6. `solve_ivp` 用 Radau 和解析雅可比自适应积分，处理 CAD 参数与原 Q/R 下较快的闭环模态。输出间隔和最大积分步长均为0.02 s，但反馈在求导时连续计算，**这不是50 Hz数字控制器仿真**，不包含采样保持或延迟。
 7. 保存 CSV、JSON、状态和力矩曲线；自动检查积分成功、有限数值及闭环误差。
 
-## 固定朝向实验
+## 原点静止直立模型实验
 
 | 名称 | 设置 | 预期 |
 |---|---|---|
@@ -73,7 +73,7 @@ simulation/
 | forward | 位置目标 x=+0.1 m | 先产生短暂俯仰再停在前方 |
 | backward | 位置目标 x=-0.1 m | 回到后方目标并恢复直立 |
 
-该分支的被控对象是局部线性模型；前进/后退是固定位置调节，没有强加不连续速度轨迹。默认 psi0=0，因此此分支 x 与初始前向位移一致。
+该分支对应原点静止直立附近的局部线性模型。已有 forward/backward 仅保留为平移静止目标的位置阶跃回归，不代表恒速直行平衡案例；前进/后退是固定位置调节，没有强加不连续速度轨迹。默认 psi0=0，因此此分支 x 与初始前向位移一致。
 
 ## 偏航运动实验
 
@@ -109,9 +109,9 @@ CSV中 x/y/s 单位 m，角度 rad，v和dx单位 m/s，omega/p/dpsi/dtheta单�
 
 ## 如何修改
 
-- 车辆参数由 `theory/parameters.py` 读取 `theory/data/physical.json`：CAD 质量及完整惯量、用户尺寸、只保留高度的质心近似。ROS physical.yaml 仍是独立的历史示例配置。
-- 静止权重沿用原 Settings；转向权重在 `theory/turning_balance/lqr.py` 的 Q_WEIGHTS/R_WEIGHTS，分别也可通过 design 参数传入。
-- 修改 `straight_balance/run.py` 的 target/初值，设置位置调节实验。
+- 车辆参数由 `theory/parameters.py` 读取 `config/lqr.toml`：CAD 质量及完整惯量、用户尺寸、只保留高度的质心近似。ROS physical.yaml 仍是独立的历史示例配置。
+- 两场景权重来自 `config/lqr.toml`，也可通过 design 参数传入。这里始终求连续 K，不读取快捷入口导出的离散 K。
+- 修改 `origin_static_balance/run.py` 的 target/初值，设置位置调节实验。
 - 修改 `turning_balance/run.py` 的 scenarios 设置恒定参考速度、偏航速度、初始朝向。
 - 修改 `common.py` 的 TORQUE_LIMIT、DT设置电机限幅和积分/输出间隔。
 - 改动力学应修改 theory，对应场景始终读取该来源。更新理论笔记本使用 `./theory/update_notebooks.sh`。

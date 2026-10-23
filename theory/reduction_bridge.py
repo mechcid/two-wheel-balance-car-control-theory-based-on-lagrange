@@ -3,7 +3,7 @@ from functools import lru_cache
 import sympy as s
 from base import q,qd,psi,theta,r,d,clean,constraints
 from turning_balance.lagrange import build as turning_build, v,omega,p,wheel_symmetry
-from straight_balance.lagrange import build as straight_build,psi_0
+from origin_static_balance.lagrange import build as origin_static_build,psi_0
 
 def clean(a):
     # world-x 消元含 sec/tan 有理式，保留适用于该表达式的匹配化简；
@@ -13,7 +13,7 @@ def clean(a):
 
 @lru_cache(None)
 def build_bridge():
-    model=turning_build();static=straight_build()
+    model=turning_build();static=origin_static_build()
     dz=s.Matrix([qd[0],qd[2],qd[3]])
     A=constraints()[1]
     solved=s.solve(list(A*qd),[qd[1],qd[4],qd[5]],dict=True)[0]

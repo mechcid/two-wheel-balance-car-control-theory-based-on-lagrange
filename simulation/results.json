@@ -1,5 +1,5 @@
 {
-  "straight": {
+  "origin_static_balance": {
     "open_loop": {
       "parameters": {
         "r": 0.0325,

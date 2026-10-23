@@ -77,7 +77,7 @@ $$T_i=\tfrac12m_i(v_i^N)^Tv_i^N+\tfrac12(\omega_i^N)^T R_{Ni}I_iR_{Ni}^T\omega_i
     return cells
 
 def make_lagrange(turning):
-    scenario='turning_balance' if turning else 'straight_balance'
+    scenario='turning_balance' if turning else 'origin_static_balance'
     intro=(r'''# 存在偏航运动：第一类与无乘子第二类拉格朗日方程
 $\psi$ 与偏航速度不作小量；精确模型是动力学与控制的来源；小俯仰展开仅作解释和对照。
 本分支车轮轴对称且左右相同，$m_W=m_L=m_R$，$J_s=I_{Lyy}=I_{Ryy}$，$J_t=I_{Lxx}=I_{Lzz}=I_{Rxx}=I_{Rzz}$。
@@ -130,13 +130,13 @@ $$M_0\delta\ddot z+C_0\delta\dot z+K_0\delta z=B_0\tau,\quad z=[x,\psi,\theta]^T
     return cells
 
 def make_lqr(turning):
-    scenario='turning_balance' if turning else 'straight_balance'
+    scenario='turning_balance' if turning else 'origin_static_balance'
     cells=[md('# '+('七状态转向轨迹误差 LQR' if turning else '六状态静止直立 LQR')),code(SETUP),code(f'from {scenario}.lqr import *\nresult=design()')]
     if turning:
         cells += [md(r'''## 世界状态与参考轨迹
 $$Z=[x,y,\psi,\theta,v,\omega,p]^T,\quad
 \dot Z=[v\cos\psi,v\sin\psi,\omega,p,(M^{-1}(B_\tau\tau-h))^T]^T.$$
-参考速度为 $v_0=0.1\,m/s,\omega_0=0.4\,rad/s$。由精确方程求恒定 $\theta_r$ 与 $\tau_r$，令 $p_r=0$、$\dot u_r=0$，使 $B_\tau\tau_r=h(\theta_r,v_0,\omega_0,0)$。
+参考速度读取 `config/lqr.toml` 的 turning 节，默认 $v_0=0.1\,m/s,\omega_0=0.4\,rad/s$。由精确方程求恒定 $\theta_r$ 与 $\tau_r$，令 $p_r=0$、$\dot u_r=0$，使 $B_\tau\tau_r=h(\theta_r,v_0,\omega_0,0)$。
 消去左右力矩后，先求标量方程 $h_3+r h_1=0$ 的直立附近根，再由 $\tau_L+\tau_R=r h_1$、$\tau_R-\tau_L=2r h_2/d$ 恢复力矩。
 对精确状态方程求完整雅可比，不从小俯仰截断方程构造控制器。
 $\psi_r=\psi_0+\omega_0t$，$x_r,y_r$ 为圆周轨迹；小量是**相对轨迹的误差**，不是世界位置或偏航角自身。
@@ -255,8 +255,8 @@ ROS 配置仍保留历史示例参数与六状态控制器；本分支的 CAD �
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--no-execute',action='store_true');args=parser.parse_args()
-    jobs=[('base.ipynb',make_base()),('straight_balance/lagrange.ipynb',make_lagrange(False)),
-          ('straight_balance/lqr.ipynb',make_lqr(False)),('turning_balance/lagrange.ipynb',make_lagrange(True)),('turning_balance/lqr.ipynb',make_lqr(True))]
+    jobs=[('base.ipynb',make_base()),('origin_static_balance/lagrange.ipynb',make_lagrange(False)),
+          ('origin_static_balance/lqr.ipynb',make_lqr(False)),('turning_balance/lagrange.ipynb',make_lagrange(True)),('turning_balance/lqr.ipynb',make_lqr(True))]
     notebooks=[]
     # 临时 kernelspec 明确绑定执行本脚本的解释器，不依赖用户机器的默认 python kernel。
     import sys

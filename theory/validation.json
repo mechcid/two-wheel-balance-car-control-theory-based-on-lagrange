@@ -1,5 +1,5 @@
 {
-  "straight_multiplier_projection_max_error": 3.296918293926865e-12,
+  "origin_static_balance_multiplier_projection_max_error": 3.296918293926865e-12,
   "turning_multiplier_projection_max_error": 2.3874235921539366e-12,
   "theta_ref": -2.5142967573183277e-07,
   "tau_ref": [
@@ -7,7 +7,7 @@
     -3.8411413609532806e-11
   ],
   "trim_residual": 4.1359030627651384e-25,
-  "straight_rank": 6,
+  "origin_static_balance_rank": 6,
   "turning_rank": 7,
   "finite_difference_error": 6.275513442233205e-11,
   "world_rotating_equivalence_error": 6.818198783342666e-12,

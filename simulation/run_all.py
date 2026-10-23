@@ -10,8 +10,8 @@ def write_report(results,target):
            '|---|---:|---:|---:|---:|']
     for branch,cases in results.items():
         for name,result in cases.items():
-            e=result['final_error'];theta=e[2 if branch=='straight' else 3]
-            position=abs(e[0]) if branch=='straight' else (e[0]**2+e[1]**2)**.5
+            e=result['final_error'];theta=e[2 if branch=='origin_static_balance' else 3]
+            position=abs(e[0]) if branch=='origin_static_balance' else (e[0]**2+e[1]**2)**.5
             lines.append(f"| {branch}/{name} | {theta:.4g} | {position:.4g} | {max(result['peak_motor_torque_Nm']):.4g} | {result['saturation_fraction']:.4g} |")
     lines += ['', 'open_loop 的发散是预期现象，达到俯仰展示阈值后提前停止；其余为闭环。',
               '静止分支为六状态局部线性模型；转向分支每种场景分别运行小俯仰模型和精确模型。',
@@ -21,9 +21,9 @@ def write_report(results,target):
     target.with_suffix('.md').write_text('\n'.join(lines)+'\n')
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--scenario',choices=['all','straight','turning'],default='all');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--scenario',choices=['all','origin_static_balance','turning'],default='all');args=parser.parse_args()
     root=Path(__file__).resolve().parent;results={}
-    for key,folder in [('straight','straight_balance'),('turning','turning_balance')]:
+    for key,folder in [('origin_static_balance','origin_static_balance'),('turning','turning_balance')]:
         if args.scenario not in ('all',key):continue
         print('Running',key,flush=True)
         spec=importlib.util.spec_from_file_location('run_'+key,root/folder/'run.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)

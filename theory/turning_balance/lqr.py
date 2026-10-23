@@ -8,10 +8,11 @@ from scipy.optimize import brentq
 import base as b
 from turning_balance.lagrange import build,mW,Js,Jt,v,omega,p,theta,u
 from parameters import values,substitutions,numeric,solve_lqr,report
-DEFAULT_V0=.1
-DEFAULT_OMEGA0=.4
-Q_WEIGHTS=(10.,10.,5.,400.,5.,2.,40.)
-R_WEIGHTS=(10.,10.)
+def reference_speeds(v0, w0):
+    from configuration import load_config
+    cfg = load_config()['turning']
+    return (cfg['v0'] if v0 is None else v0,
+            cfg['omega0'] if w0 is None else w0)
 
 def physical_subs():
     vals,_=values()
@@ -30,8 +31,9 @@ def exact_functions():
             s.lambdify(theta,m['M'].diff(theta).subs(sub),'numpy',cse=True),
             s.lambdify(args,m['h'].jacobian(s.Matrix(args)).subs(sub),'numpy',cse=True))
 
-def trim(v0=DEFAULT_V0,w0=DEFAULT_OMEGA0):
+def trim(v0=None,w0=None):
     """求直立附近恒定速度解。返回副本，避免调用者修改缓存/共享数组。"""
+    v0,w0=reference_speeds(v0,w0)
     if not np.isfinite([v0,w0]).all():raise ValueError('参考速度必须有限')
     _,hf,B,_,_=exact_functions();vals,_=values();r=vals['r'];d=vals['d']
     def residual(th):
@@ -72,7 +74,8 @@ def symbolic():
 def error_transform(heading):
     c,sn=np.cos(heading),np.sin(heading);H=np.eye(7);H[:2,:2]=[[c,sn],[-sn,c]];return H
 
-def state_matrices(v0=DEFAULT_V0,w0=DEFAULT_OMEGA0,heading=0.):
+def state_matrices(v0=None,w0=None,heading=0.):
+    v0,w0=reference_speeds(v0,w0)
     ref=trim(v0,w0);th=ref['theta'];mf,hf,Btau,dmf,dhf=exact_functions()
     M=mf(th);acc=np.linalg.solve(M,Btau@ref['tau']-np.asarray(hf(th,v0,w0,0.)).ravel())
     # 隐函数微分 M da = -dh - dM a；保留全部 theta,v,omega,p 导数。
@@ -85,18 +88,25 @@ def state_matrices(v0=DEFAULT_V0,w0=DEFAULT_OMEGA0,heading=0.):
     Ae=H@A@H.T+Hdot@H.T
     return A,B,Ae,H
 
-def design(v0=DEFAULT_V0,w0=DEFAULT_OMEGA0,q_weights=Q_WEIGHTS,r_weights=R_WEIGHTS):
+def design(v0=None,w0=None,q_weights=None,r_weights=None):
+    from configuration import load_config,cost_matrix
+    cfg=load_config()['turning']
+    v0=cfg['v0'] if v0 is None else v0
+    w0=cfg['omega0'] if w0 is None else w0
+    Q=cost_matrix(cfg['Q'] if q_weights is None else q_weights,7,'Q')
+    R=cost_matrix(cfg['R'] if r_weights is None else r_weights,2,'R',positive=True)
     if abs(v0)<1e-10 and abs(w0)<1e-10:
-        raise ValueError('静止七状态模型存在不可控横向位置零模态；请使用 straight_balance 六状态分支。')
+        raise ValueError('静止七状态模型存在不可控横向位置零模态；请使用 origin_static_balance 六状态分支。')
     Aw,B,Ae,H=state_matrices(v0,w0)
-    result=solve_lqr(Ae,B,np.diag(q_weights),np.diag(r_weights));ref=trim(v0,w0)
+    result=solve_lqr(Ae,B,Q,R);ref=trim(v0,w0)
     result.update(A_world=Aw,H=H,v0=v0,w0=w0,theta_ref=ref['theta'],tau_ref=ref['tau'],trim_residual=ref['residual'])
     return result
 
 @lru_cache(None)
 def reference_pitch(v0,w0):return trim(v0,w0)['theta']
 
-def reference(t,v0=DEFAULT_V0,w0=DEFAULT_OMEGA0,psi0=0.):
+def reference(t,v0=None,w0=None,psi0=0.):
+    v0,w0=reference_speeds(v0,w0)
     heading=psi0+w0*t
     if abs(w0)>1e-12:x=v0/w0*(np.sin(heading)-np.sin(psi0));y=v0/w0*(np.cos(psi0)-np.cos(heading))
     else:x=v0*t*np.cos(psi0);y=v0*t*np.sin(psi0)

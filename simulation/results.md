@@ -4,10 +4,10 @@
 
 | 分支/场景 | 末端俯仰误差 rad | 末端位置误差 m | 电机峰值 N m | 限幅采样比例 |
 |---|---:|---:|---:|---:|
-| straight/open_loop | 0.1965 | 0.005846 | 0 | 0 |
-| straight/balance | -9.194e-09 | 1.001e-07 | 0.1959 | 0 |
-| straight/forward | 1.994e-08 | 6.532e-09 | 0.1252 | 0 |
-| straight/backward | -3.833e-08 | 1.936e-07 | 0.2666 | 0 |
+| origin_static_balance/open_loop | 0.1965 | 0.005846 | 0 | 0 |
+| origin_static_balance/balance | -9.194e-09 | 1.001e-07 | 0.1959 | 0 |
+| origin_static_balance/forward | 1.994e-08 | 6.532e-09 | 0.1252 | 0 |
+| origin_static_balance/backward | -3.833e-08 | 1.936e-07 | 0.2666 | 0 |
 | turning/left_turn/small_pitch | -6.502e-10 | 1.196e-08 | 0.2062 | 0 |
 | turning/left_turn/exact | -6.502e-10 | 1.196e-08 | 0.2062 | 0 |
 | turning/right_turn/small_pitch | -6.26e-10 | 1.151e-08 | 0.226 | 0 |

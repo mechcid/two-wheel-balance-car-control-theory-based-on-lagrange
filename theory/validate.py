@@ -5,9 +5,9 @@ import numpy as np
 import sympy as s
 from scipy.integrate import solve_ivp
 import base as b
-from straight_balance import lagrange as straight
+from origin_static_balance import lagrange as origin_static_balance
 from turning_balance import lagrange as turn
-from straight_balance.lqr import design as design_straight
+from origin_static_balance.lqr import design as design_origin_static
 from turning_balance.lqr import design,state_matrices,error_transform,physical_subs,reference,trim,rhs
 from parameters import substitutions,numeric
 
@@ -18,9 +18,9 @@ def main():
         assert b.clean(k['omega_hat'][name]-b.skew(k['omega'][name]))==s.zeros(3)
     # 静止分支与旧数值函数核查由 simulation/check_matrix_source.py 执行。
     print('构建精确模型与静止模型',flush=True)
-    st=straight.build();moving=turn.build();rng=np.random.default_rng(17)
+    st=origin_static_balance.build();moving=turn.build();rng=np.random.default_rng(17)
     errors={}
-    for label,model,sub in [('straight',st,{**substitutions(),straight.psi_0:.37}),('turning',moving,physical_subs())]:
+    for label,model,sub in [('origin_static_balance',st,{**substitutions(),origin_static_balance.psi_0:.37}),('turning',moving,physical_subs())]:
         print('校验乘子投影:',label,flush=True)
         S=model['S']; u=model['u']; allowed=dict(zip(b.qd,S*u))
         def fn(expr):return s.lambdify((b.q,u),expr.subs(allowed,simultaneous=True).subs(sub),'numpy',cse=True)
@@ -54,7 +54,7 @@ def main():
         tr=trim(vv,ww);z=reference(0,vv,ww,.7)
         assert np.max(abs(rhs(z,tr['tau'])[4:]))<1e-10
     print('求解 LQR',flush=True)
-    result=design(); static=design_straight()
+    result=design(); static=design_origin_static()
     assert result['rank']==7 and static['rank']==6
     # 用精确非线性动力学的数值微分，独立核对沿轨迹的七状态 A/B。
     mf=s.lambdify((b.theta,),moving['M'].subs(physical_subs()),'numpy')
@@ -102,7 +102,7 @@ def main():
     assert soln.success and solw.success and sole.success
     final_error=float(np.max(abs(soln.y[:,-1]-reference(35))))
     assert final_error<1e-3
-    errors.update(theta_ref=result['theta_ref'],tau_ref=result['tau_ref'].tolist(),trim_residual=result['trim_residual'],straight_rank=static['rank'],turning_rank=result['rank'],
+    errors.update(theta_ref=result['theta_ref'],tau_ref=result['tau_ref'].tolist(),trim_residual=result['trim_residual'],origin_static_balance_rank=static['rank'],turning_rank=result['rank'],
                   finite_difference_error=fd_error,world_rotating_equivalence_error=equiv,
                   nonlinear_final_max_error=final_error,turning_care_residual=result['care_residual'],
                   turning_closed_poles=[str(x) for x in result['poles']])

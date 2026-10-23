@@ -1,24 +1,14 @@
-"""实车 CAD 参数唯一入口；Q/R 沿用原示例配置，需重新求解增益。"""
-from pathlib import Path
-import importlib.util
-import json
+"""共用配置的数值代入及连续 LQR；快捷离散设计见 control/。"""
+from types import SimpleNamespace
 import numpy as np
 import base as b
-ROOT=Path(__file__).resolve().parents[1]
+from configuration import load_config
 
 def values():
-    # 读取旧仿真文件的控制权重默认值，不执行 main()，也不读取过期输出矩阵。
-    import sys
-    spec=importlib.util.spec_from_file_location('balance_numeric_source',ROOT/'simulation/lqr_simulation.py')
-    module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
-    p=json.loads((ROOT/'theory/data/physical.json').read_text())['parameters']
-    for name in ('B','L','R'):
-        J=np.array([[p[f'I_{name}xx'],p.get(f'I_{name}xy',0),p.get(f'I_{name}xz',0)],
-                    [p.get(f'I_{name}xy',0),p[f'I_{name}yy'],p.get(f'I_{name}yz',0)],
-                    [p.get(f'I_{name}xz',0),p.get(f'I_{name}yz',0),p[f'I_{name}zz']]])
-        eig=np.linalg.eigvalsh(J)
-        if eig[0]<=0 or eig[-1]>eig[:2].sum(): raise ValueError(f'Invalid inertia: {name}')
-    return p,module.CONFIG
+    cfg = load_config()
+    # 保留旧调用形式；当前理论不再导入仿真模块。
+    return dict(cfg['physical']), SimpleNamespace(
+        q_weights=cfg['origin_static_balance']['Q'], r_weights=cfg['origin_static_balance']['R'])
 
 def substitutions():
     p,_=values()

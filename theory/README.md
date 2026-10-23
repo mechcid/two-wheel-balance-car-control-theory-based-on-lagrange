@@ -1,3 +1,5 @@
+> 2026-10-20 配置入口更新：物理参数与两场景 Q/R 统一读取 `config/lqr.toml`；`data/physical.json` 仅保留为 CAD 历史快照。理论 `design()` 和 Notebook 继续展示连续 CARE；快捷连续／离散生成见 [使用说明](../doc/LQR快捷计算使用说明.md)。更新 Notebook 会覆盖手工修改。
+
 # 非轴对称电机分支：完整车体惯量、精确动力学与局部 LQR
 
 当前分支为 `dissymmetry_motor`，从 `master` 分出；原分支保留无惯性积模型。本分支保留完整车体质心惯量，质心仅保留高度，控制矩阵从精确动力学在可行参考上求导。
@@ -13,7 +15,7 @@ theory/
 ├── base.ipynb                      相邻变换和 N 系速度的展开公式
 ├── lagrange_utils.py                显式 EL 算子、乘子法、正确的无乘子投影
 ├── parameters.py                   读取现有参数、数值代入、CARE 公共函数
-├── straight_balance/
+├── origin_static_balance/
 │   ├── lagrange.py / lagrange.ipynb 静止直立附近，两种拉格朗日形式及 M0/C0/K0/B0
 │   └── lqr.py / lqr.ipynb           六状态 A/B、J、P、K 和闭环极点
 ├── turning_balance/
@@ -60,7 +62,7 @@ theory/
 单独查看增益数值：
 
 ```bash
-PYTHONPATH=theory .venv/bin/python -m straight_balance.lqr
+PYTHONPATH=theory .venv/bin/python -m origin_static_balance.lqr
 PYTHONPATH=theory .venv/bin/python -m turning_balance.lqr
 ```
 
@@ -91,7 +93,7 @@ PYTHONPATH=theory .venv/bin/python -m turning_balance.lqr
 
 ## 4. 两个场景的近似不同
 
-### straight_balance：固定名义朝向、静止直立附近
+### origin_static_balance：固定名义朝向、静止直立附近
 
 名义速度为零，`psi=psi_0+delta_psi`，`theta=delta_theta`。保留能量的二阶扰动项、动力学的一阶扰动项，约束也在同一参考点冻结。这里的“无偏航运动”指无名义偏航，不是删除小偏航扰动与控制通道。前进/后退可以在这个局部模型中通过位置参考变化处理，但它不是任意速度、任意范围的运动模型。
 
@@ -145,7 +147,7 @@ Q/R 是可修改函数参数，默认沿用原六状态的俯仰优先配置；�
 
 ## 7. 参数来源和已有仿真的关系
 
-`parameters.py` 从 `data/physical.json` 读取本分支唯一的 CAD 参数配置。原 `simulation/lqr_simulation.py` 仅提供 Q/R 默认设置及独立静止矩阵回归实现，不再提供本分支的车辆参数。
+`parameters.py` 从 `config/lqr.toml` 读取物理参数和默认权重。原 `simulation/lqr_simulation.py` 保留为独立历史回归实现，不再提供当前理论配置。
 
 - r=0.0325 m，d=0.185 m（轮中心平面间距），l=0.041527 m。
 - mB=0.831 kg，mL=mR=0.046 kg；车体导出不包含车轮。

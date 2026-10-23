@@ -3,7 +3,7 @@ import sys,io,contextlib
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'theory'))
 with contextlib.redirect_stdout(io.StringIO()):
-    from straight_balance import lagrange as symbolic
+    from origin_static_balance import lagrange as symbolic
 from lqr_simulation import Parameters,build_state_space
 from dataclasses import asdict,fields
 from parameters import values
